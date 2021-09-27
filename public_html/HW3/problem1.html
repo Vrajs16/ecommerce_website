@@ -8,18 +8,52 @@
         window.addEventListener("load", () => {
             console.log("loaded via javascript");
             //TODO: add any extra onload processing you may need here
+            let x = document.querySelectorAll("nav>ul>li>a");
+            for (let i = 0; i < x.length; i++)
+                x[i].onclick = getCurrentSelection; //x[i].addEventListener("click", () => updateCurrentPage(x[i].innerText)); <- works to
         });
         function getCurrentSelection() {
             setTimeout(() => {
                 //added this delay here as some solutions may require it to update properly (i.e., click code may complete before the navigation changes)
                 //TODO: add code for processing the current selection 
-
+                updateCurrentPage(document.querySelector("a:focus").innerText); //this.innerText <- works to
                 //Note: likely you'll want to call updateCurrentPage towards the end
             }, 100);
         }
     </script>
     <style>
         /* TODO: make edits here */
+        h1 {
+            text-transform: capitalize;
+        }
+
+        nav>ul>li>a:hover {
+            color: rgb(255, 165, 0);
+            transition: 400ms ease-in-out;
+        }
+
+        nav>ul>li>a {
+            text-transform: capitalize;
+            color: white;
+        }
+
+        nav>ul>li {
+            background-color: rgb(66, 120, 180);
+            display: inline;
+            list-style: none;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        ul>li {
+            /* "✓" */
+            list-style-type: "\2713";
+        }
+
+        li>ul>li {
+            /* "✓" */
+            list-style-type: "\2713";
+        }
     </style>
     <!-- make the necessary edits above this line -->
 
