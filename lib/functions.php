@@ -1,13 +1,6 @@
 <?php
-//TODO 1: require db.php
 require_once(__DIR__ . "/db.php");
 $BASE_PATH = '/Project/'; //This is going to be a helper for redirecting to our base project path since it's nested in another folder
-/** Safe Echo Function
- * Takes in a value and passes it through htmlspecialchars()
- * or
- * Takes an array, a key, and default value and will return the value from the array if the key exists or the default value.
- * Can pass a flag to determine if the value will immediately echo or just return so it can be set to a variable
- */
 function se($v, $k = null, $default = "", $isEcho = true)
 {
     if (is_array($v) && isset($k) && isset($v[$k])) {
@@ -80,3 +73,23 @@ function get_user_id()
     return false;
 }
 //TODO 4: Flash Message Helpers
+function flash($msg = "", $color = "info")
+{
+    $message = ["text" => $msg, "color" => $color];
+    if (isset($_SESSION['flash'])) {
+        array_push($_SESSION['flash'], $message);
+    } else {
+        $_SESSION['flash'] = array();
+        array_push($_SESSION['flash'], $message);
+    }
+}
+
+function getMessages()
+{
+    if (isset($_SESSION['flash'])) {
+        $flashes = $_SESSION['flash'];
+        $_SESSION['flash'] = array();
+        return $flashes;
+    }
+    return array();
+}
