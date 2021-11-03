@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS `UserRoles` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES Users(`id`),
   FOREIGN KEY (`role_id`) REFERENCES Roles(`id`),
-  UNIQUE KEY (`user_id`, `role_id`) COMMENT "A user can have many unique roles"
-);
+  UNIQUE KEY (`user_id`, `role_id`)
+)
