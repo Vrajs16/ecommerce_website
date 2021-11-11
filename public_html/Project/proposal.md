@@ -1,4 +1,4 @@
-# Project Name: Simple Shop
+# **Project Name: Simple Shop**
 ## Project Summary: This project will create a simple e-commerce site for users. Administrators or store owners will be able to manage inventory and users will be able to manage their cart and place orders.
 ## Github Link: https://github.com/Vrajs16/IT202-003/tree/prod/public_html/Project/
 ## Project Board Link: https://github.com/Vrajs16/IT202-003/projects
@@ -22,95 +22,95 @@
 --> 
 ### Proposal Checklist and Evidence
 - Milestone 1 -
-  - [ ] \(mm/dd/yyyy of completion) User will be able to register a new account
+  - [ ] \(10/25/2021 of completion) User will be able to register a new account
   -  List of Evidence of Feature Completion
     - Status: Completed
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Direct Link: https://vas4-prod.herokuapp.com/Project/register.php
     - Pull Requests
       - PR link #1: https://github.com/Vrajs16/IT202-003/pull/33
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141216177-50b3e544-4213-4fcf-87b2-d184898bef66.png)
+        - Screenshot #1 description: This image shows that the user is able to register a new account on the website
         
-  - [ ] \(mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
+  - [ ] \(10/25/2021 of completion) User will be able to login to their account (given they enter the correct credentials)
   -  List of Evidence of Feature Completion
     - Status: Completed
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Direct Link: https://vas4-prod.herokuapp.com/Project/login.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - PR link #1: https://github.com/Vrajs16/IT202-003/pull/33
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141216369-2362ae26-7704-4019-9d00-585ac0d96903.png)
+        - Screenshot #1 description: This images shows that the user is able to login to their account
         
-  - [ ] \(mm/dd/yyyy of completion) User will be able to logout
+  - [ ] \(10/25/2021 of completion) User will be able to logout
   -  List of Evidence of Feature Completion
     - Status: Completed
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Direct Link: https://vas4-prod.herokuapp.com/Project/logout.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - PR link #1: https://github.com/Vrajs16/IT202-003/pull/33
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141216559-32666e79-8b45-4e3f-8129-7c26ce5b6b30.png)
+        - Screenshot #1 description: This image shows that the user is able to logout of their account
 
-  - [ ] \(mm/dd/yyyy of completion) Basic security rules implemented
+  - [ ] \(10/25/2021 of completion) Basic security rules implemented
   -  List of Evidence of Feature Completion
     - Status: Completed
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Direct Link: https://vas4-prod.herokuapp.com/Project/login.php
     - Pull Requests
       - PR link #1: https://github.com/Vrajs16/IT202-003/pull/33
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141218524-f81ddc8d-dcb7-4646-b050-036d2e632b03.png)
+        - Screenshot #1 description: This image shows the basic security rules implemented of not having permission to view the page
 
   - [ ] \(10/25/2021 of completion) Basic Roles implemented
   -  List of Evidence of Feature Completion
     - Status: Completed
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Direct Link: https://vas4-prod.herokuapp.com/Project/home.php
     - Pull Requests
       - PR link #1: https://github.com/Vrajs16/IT202-003/pull/32
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141216762-9a93782c-8264-4a75-a95e-1b9285d70981.png)
+        - Screenshot #1 description: This image shows the user roles implemented on my admin account
 
-  - [ ] \(mm/dd/yyyy of completion) Site should have basic styles/theme applied; everything should be styled
+  - [ ] \(11/10/2021 of completion) Site should have basic styles/theme applied; everything should be styled
   -  List of Evidence of Feature Completion
     - Status: Completed
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Direct Link: https://github.com/Vrajs16/IT202-003/blob/prod/public_html/Project/styles.css
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - PR link #1: https://github.com/Vrajs16/IT202-003/pull/52
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141216806-6140a92e-8bd3-45ae-a2bd-68df816112bc.png)
+        - Screenshot #1 description: This image shows that that style of the website has changed from the default styles
 
-    - [ ] \(mm/dd/yyyy of completion) Any output messages/errors should be “user friendly”
+    - [ ] \(10/25/2021 of completion) Any output messages/errors should be “user friendly”
   -  List of Evidence of Feature Completion
     - Status: Completed
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Direct Link: https://github.com/Vrajs16/IT202-003/blob/prod/partials/flash.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - PR link #1: https://github.com/Vrajs16/IT202-003/pull/33
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141216848-7bde9666-720e-4301-912b-b376e1a411b7.png)
+        - Screenshot #1 description: This images shows a friendly error to the user.
 
-    - [ ] \(mm/dd/yyyy of completion) User will be able to see their profile
+    - [ ] \(10/25/2021 of completion) User will be able to see their profile
   -  List of Evidence of Feature Completion
     - Status: Completed
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Direct Link: https://vas4-prod.herokuapp.com/Project/profile.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - PR link #1: https://github.com/Vrajs16/IT202-003/pull/33
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141216889-0671aeba-5f60-4c82-9a08-f81d48a1ac52.png)
+        - Screenshot #1 description: This image shows that the user is able to look at their profile
 
-    - [ ] \(mm/dd/yyyy of completion) User will be able to edit their profile
+    - [ ] \(10/25/2021 of completion) User will be able to edit their profile
   -  List of Evidence of Feature Completion
     - Status: Completed
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Direct Link: https://vas4-prod.herokuapp.com/Project/profile.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - PR link #1: https://github.com/Vrajs16/IT202-003/pull/33
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141216983-21ffdebe-b0ce-4452-9a0f-f36a9423140d.png)
+        - Screenshot #1 description: This image shows that the user is able to change their profile
 - Milestone 2
 - Milestone 3
 - Milestone 4
