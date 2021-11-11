@@ -1,0 +1,47 @@
+.alert-success {
+  background-color: green;
+}
+
+.alert-warning {
+  background-color: yellow;
+}
+
+.alert-danger {
+  background-color: red;
+}
+
+.alert-info {
+  background-color: teal;
+}
+nav li {
+  display: inline;
+  background-color: rebeccapurple;
+}
+nav li a {
+  color: hotpink;
+}
+input {
+  padding: 10px;
+  font-size: 2rem;
+  border-radius: 30px;
+  outline: none;
+  border: 5px solid black;
+  margin: 10px;
+}
+body {
+  font-size: 2rem;
+  box-sizing: border-box;
+  background-color: cyan;
+  color: rgb(153, 0, 153);
+}
+.username {
+  padding: 10px 0px;
+}
+
+.login {
+  background-color: rgb(209, 209, 209);
+}
+.login:hover {
+  transition: ease-in-out 0.25s;
+  background-color: gray;
+}
