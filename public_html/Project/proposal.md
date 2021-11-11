@@ -2,7 +2,7 @@
 ## Project Summary: This project will create a simple e-commerce site for users. Administrators or store owners will be able to manage inventory and users will be able to manage their cart and place orders.
 ## Github Link: https://github.com/Vrajs16/IT202-003/tree/prod/public_html/Project/
 ## Project Board Link: https://github.com/Vrajs16/IT202-003/projects
-## Website Link: http://vas4-prod.herokuapp.com/Project/
+## Website Link: http://vas4-prod.herokuapp.com/Project/login.php
 ## Your Name: Vraj Shah
 
 <!--
@@ -111,7 +111,117 @@
     - Screenshots
       - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141216983-21ffdebe-b0ce-4452-9a0f-f36a9423140d.png)
         - Screenshot #1 description: This image shows that the user is able to change their profile
+
 - Milestone 2
+  - [ ] \(mm/dd/yyyy of completion) User with an admin role or shop owner role will be able to add products to inventory
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion)Any user will be able to see products with visibility = true on the Shop page
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) Admin/Shop owner will be able to edit any product
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) Admin/Shop owner will be able to edit any product
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) User will be able to click an item from a list and view a full page with more info about the item (Product Details Page)
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) User must be logged in for any Cart related activity below
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) User will be able to add items to Cart
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) User will be able to see their cart
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) User will be able to change quantity of items in their cart
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) User will be able to remove a single item from their cart vai button click
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) User will be able to clear their entire cart via a button click
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
 - Milestone 3
 - Milestone 4
 
