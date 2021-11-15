@@ -223,6 +223,46 @@
         - Screenshot #1: 
 
 - Milestone 3
+  - [ ] \(mm/dd/yyyy of completion) User will be able to purchase items in their Cart
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) Order Confirmation Page
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) User will be able to see their Purchase History
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
+  - [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all Purchase History
+  -  List of Evidence of Feature Completion
+    - Status: Incomplete
+    - Direct Link: 
+    - Pull Requests
+      - PR link #1: 
+    - Screenshots
+      - Screenshot #1: 
+        - Screenshot #1: 
+
 - Milestone 4
 
 ### Intructions
