@@ -112,13 +112,6 @@
       - Screenshot #1: ![image](https://user-images.githubusercontent.com/89588024/141216983-21ffdebe-b0ce-4452-9a0f-f36a9423140d.png)
         - Screenshot #1 description: This image shows that the user is able to change their profile
 
-
-
-Testing here
-
-
-
-
 - Milestone 2
   - [ ] \(mm/dd/yyyy of completion) User with an admin role or shop owner role will be able to add products to inventory
   -  List of Evidence of Feature Completion
