@@ -1,0 +1,22 @@
+.main-nav-container {
+  background-color: var(--color1);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.logo-container {
+  flex: 1;
+}
+.main-nav-container::after {
+  flex: 1;
+  content: "";
+}
+.main-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.main-title {
+  font-size: 2rem;
+  color: var(--color4);
+}
