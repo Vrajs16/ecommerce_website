@@ -1,6 +1,9 @@
 <div class="container-fluid">
     <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center ">
         <?php foreach ($results as $item) : ?>
+            <?php if (se($item, "visibility", "", false) === "0" && !has_role("Admin")) : ?>
+                <?php continue; ?>
+            <?php endif ?>
             <div class="col">
                 <div class="card h-100 bg-light">
                     <div class="card-header fs-4">
@@ -37,7 +40,9 @@
                     </div>
                     <div class="card-footer">
                         Cost: $<?php se($item, "unit_price"); ?>
-                        <button class="btn btn-primary">Add To Cart</button>
+                        <?php if (basename($_SERVER['PHP_SELF']) !== "list_products.php") : ?>
+                            <button class="btn btn-primary">Add To Cart</button>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>

@@ -8,13 +8,10 @@ require(__DIR__ . "/../../partials/nav.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="background.css">
     <link rel="stylesheet" href="./css/background.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="icon" href="/Images/Logo-512.png" type="image/png">
     <title>shop.com</title>
-    <script src="input-search.js"></script>
 </head>
 
 <body>
@@ -22,13 +19,7 @@ require(__DIR__ . "/../../partials/nav.php");
         <div class="message-info">
             Search for an item and find the lowest price on it today!
         </div>
-        <!-- <div class="search-container">
-            <div class="search-area">
-                <form action="./shop.php" method="get">
-                    <input class="input-search" type="search" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" autocomplete="off" name="name" value="<?php se($name); ?>">
-                </form>
-            </div>
-        </div> -->
+        <div class="message2-info">FILTER</div>
         <?php require(__DIR__ . "/filter.php") ?>
         <div class="message2-info">
             Products
@@ -49,11 +40,8 @@ require(__DIR__ . "/../../partials/nav.php");
             <div class="company-container"><a href="https://www.lowes.com" target="_blank"><button class="company-btn c7"></button></a></div>
             <div class="company-container"><a href="https://www.homedepot.com" target="_blank"><button class="company-btn c8"></button></a></div>
             <div class="company-container"><a href="https://www.target.com" target="_blank"><button class="company-btn c9"></button></a></div>
-
         </div>
-
     </main>
-
 </body>
 
 </html>

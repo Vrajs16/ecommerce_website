@@ -15,7 +15,7 @@ if (!in_array($order, ["asc", "desc"])) {
 $name = se($_GET, "name", "", false);
 
 //split query into data and total
-$base_query = "SELECT id, name, description, stock, unit_price, category, visibility FROM Products WHERE stock > 0 and visibility = 1";
+$base_query = "SELECT id, name, description, stock, unit_price, category, visibility FROM Products WHERE stock > 0 ";
 $query = "";
 $params = []; //define default params, add keys as needed and pass to execute
 //apply name filter
@@ -47,7 +47,6 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 ?>
-<div class="message2-info">FILTER</div>
 <form class="row row-cols-auto g-3 align-items-center justify-content-center">
     <div class="col">
         <div class="input-group">
