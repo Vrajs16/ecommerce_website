@@ -51,7 +51,7 @@ try {
 <form class="row row-cols-auto g-3 align-items-center justify-content-center">
     <div class="col">
         <div class="input-group">
-            <div class="input-group-text">Name</div>
+            <div class="input-group-text">Search</div>
             <input class="form-control" name="name" value="<?php se($name); ?>" />
         </div>
     </div>
