@@ -30,11 +30,17 @@ require(__DIR__ . "/../../partials/nav.php");
         <?php endif; ?>
         <div class="search-container">
             <div class="search-area">
-                <form action="/search" method="get">
+                <form action="./shop.php" method="get">
                     <input class="input-search" type="search" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" autocomplete="off" name="search">
                 </form>
             </div>
         </div>
+        <div class="message2-info">
+            Products
+        </div>
+        <?php
+        require(__DIR__ . "/show_products.php");
+        ?>
         <div class="message2-info">
             Look for items at these websites!
         </div>
