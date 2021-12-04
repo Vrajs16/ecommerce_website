@@ -1,0 +1,31 @@
+:root {
+  --color1: #fec601;
+  --color2: #659dbd;
+  --color3: #ffffff;
+  --color4: #000000;
+  --color5: #60d25e;
+  --color6: #5ecc4c;
+  --color6: #53b348;
+  --color7: #f2ecd4;
+}
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  /* font-family: "Playfair Display", serif; */
+}
+html {
+  background-color: var(--color4);
+  min-width: 320px;
+}
+body {
+  background-color: var(--color7);
+  margin: auto;
+  /* max-width: 1920px; */
+  min-width: 320px;
+  /* height: 100%; */
+  min-height: 100vh;
+}

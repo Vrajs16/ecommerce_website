@@ -5,6 +5,7 @@
   margin: 0px;
   padding: 0px;
 }
+
 html,
 body {
   background-color: #f2ecd4;
@@ -23,6 +24,9 @@ body {
 
 .alert-info {
   background-color: teal;
+}
+div {
+  word-wrap: break-word;
 }
 /* nav li {
   display: inline;
