@@ -81,12 +81,12 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .message-info {
   font-size: 2rem;
-  padding: 3rem 1rem 0 1rem;
+  padding: 3rem 1rem 0rem 1rem;
   text-align: center;
 }
 .message2-info {
   font-size: 2rem;
-  padding: 5rem 1rem 0 1rem;
+  padding: 2rem 1rem 0rem 1rem;
   text-align: center;
 }
 .search-container {

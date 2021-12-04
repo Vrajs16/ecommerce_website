@@ -1,6 +1,5 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,18 +22,14 @@ require(__DIR__ . "/../../partials/nav.php");
         <div class="message-info">
             Search for an item and find the lowest price on it today!
         </div>
-        <?php if (has_role("Admin")) : ?>
-            <h1 style="text-align: center;">ADMIN ROLE HAHAHAH! </h1>
-        <?php else : ?>
-            <h1 style="text-align: center;">NO ADMIN ROLE :-(</h1>
-        <?php endif; ?>
-        <div class="search-container">
+        <!-- <div class="search-container">
             <div class="search-area">
                 <form action="./shop.php" method="get">
-                    <input class="input-search" type="search" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" autocomplete="off" name="search">
+                    <input class="input-search" type="search" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" autocomplete="off" name="name" value="<?php se($name); ?>">
                 </form>
             </div>
-        </div>
+        </div> -->
+        <?php require(__DIR__ . "/filter.php") ?>
         <div class="message2-info">
             Products
         </div>
