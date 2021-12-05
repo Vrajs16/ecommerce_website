@@ -1,6 +1,7 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,6 +45,8 @@ require(__DIR__ . "/../../partials/nav.php");
             <div class="company-container"><a href="https://www.homedepot.com" target="_blank"><button class="company-btn c8"></button></a></div>
             <div class="company-container"><a href="https://www.target.com" target="_blank"><button class="company-btn c9"></button></a></div>
         </div>
+
+
     </main>
 </body>
 

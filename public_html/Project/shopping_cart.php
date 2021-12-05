@@ -63,6 +63,23 @@ if (isset($_POST["empty_cart"])) {
     }
 }
 
+if (isset($_POST["remove_product"])) {
+    $db = getDB();
+    $prodid = se($_POST["prodid"], null, "", false); //User id
+    $query5 = "DELETE From Cart where product_id=:prodid limit 1";
+    $stmt = $db->prepare($query5); //dynamically generated query
+    try {
+        $stmt->execute([":prodid" => $prodid]);
+        $name = $_POST['name'];
+        flash("CLEARED ITEM: $name!", "success");
+        echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">$(window).on("load", function() {$("#ShoppingCart").modal("show");});</script>';
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+}
+
+
 if (is_logged_in()) {
     $db = getDB();
     $userid = se(get_user_id(), null, "", false); //User id
@@ -106,7 +123,8 @@ require_once(__DIR__ . "/../../partials/flash.php");
                                         </form>
                                     <?php endif ?>
                                     <form method="POST" action="/Project/shop.php">
-                                        <input type="hidden" name="id" value="<?php se($item, "product_id") ?>">
+                                        <input type="hidden" name="prodid" value="<?php se($item, "product_id") ?>">
+                                        <input type="hidden" name="name" value="<?php se($item, "name") ?>">
                                         <input type="submit" class=" float-start btn btn-danger" value="Remove" name="remove_product">
                                     </form>
                                     <div class="float-start"> <?php se($item, "name") ?></div>
