@@ -50,6 +50,19 @@ if (isset($_POST["add_to_cart"])) {
         }
     }
 }
+if (isset($_POST["empty_cart"])) {
+    $db = getDB();
+    $userid = se(get_user_id(), null, "", false); //User id
+    $query5 = "DELETE From Cart where user_id=:userid";
+    $stmt = $db->prepare($query5); //dynamically generated query
+    try {
+        $stmt->execute([":userid" => $userid]);
+        flash("CLEARED CART!", "success");
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+}
+
 if (is_logged_in()) {
     $db = getDB();
     $userid = se(get_user_id(), null, "", false); //User id
@@ -100,9 +113,9 @@ require_once(__DIR__ . "/../../partials/flash.php");
                                     <div class="float-end  "> $<?php se($item, "unit_cost"); ?> </div><br><br>
                                     <form method="POST" action="/Project/shop.php">
                                         <input type="hidden" name="id" value="<?php se($item, "product_id") ?>">
-                                        <input type="button" class="btn btn-secondary btn-number" data-type="minus" value="-" data-field="quant[2]"></input>
+                                        <input type="submit" class="btn btn-secondary btn-number" data-type="minus" value="-" name="minus" data-field="quant[2]"></input>
                                         <input type="text" name="quant[2]" class="col-xs-1" value="<?php se($item, "desired_quantity") ?>" min="1" max="100">
-                                        <input type="button" class="btn btn-secondary btn-number" data-type="plus" value="+" data-field="quant[2]"></input>
+                                        <input type="submit" class="btn btn-secondary btn-number" data-type="plus" name="plus" value="+" data-field="quant[2]"></input>
                                     </form>
                                     <br>
                                 </div>
@@ -117,8 +130,10 @@ require_once(__DIR__ . "/../../partials/flash.php");
                     <form method="POST" action="/Project/shop.php">
                         <input type="submit" class="m-2 float-start btn btn-danger" value="Empty Cart" name="empty_cart">
                     </form>
-                    <button type="button" class="btn btn-secondary float-start m-3" data-bs-dismiss="modal">Update Cart</button>
-                    <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal">Checkout</button>
+                    <form method="POST" action="/Project/shop.php">
+                        <button type="submit" class="btn btn-primary float-end" data-bs-dismiss="modal">Checkout</button>
+                    </form>
+
                 </div>
             </div>
         </div>
