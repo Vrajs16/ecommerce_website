@@ -55,7 +55,7 @@
                         <?php if (basename($_SERVER['PHP_SELF']) !== "list_products.php" && basename($_SERVER['PHP_SELF']) !== "edit_products.php") : ?>
                             <form method="POST">
                                 <input type="hidden" name="id" value="<?php se($item, "id") ?>">
-                                <input type="submit" class="btn btn-primary float-end" value="Add To Cart" name="add">
+                                <input type="submit" class="btn btn-primary float-end" value="Add To Cart" name="add_to_cart">
                             </form>
                         <?php endif ?>
                     </div>
