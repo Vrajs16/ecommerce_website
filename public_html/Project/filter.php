@@ -15,8 +15,8 @@ if (!in_array($order, ["asc", "desc"])) {
 $name = se($_GET, "name", "", false);
 
 //split query into data and total
-$base_query = "SELECT id, name, description, stock, unit_price, category, visibility FROM Products WHERE stock > 0 ";
-$query = "";
+$base_query = "SELECT id, name, description, stock, unit_price, category, visibility FROM Products WHERE ";
+$query = "1=1 ";
 $params = []; //define default params, add keys as needed and pass to execute
 //apply name filter
 if (!empty($name)) {
