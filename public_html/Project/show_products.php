@@ -52,8 +52,11 @@
                     </div>
                     <div class="card-footer">
                         Cost: $<?php se($item, "unit_price"); ?>
-                        <?php if (basename($_SERVER['PHP_SELF']) !== "list_products.php" && basename($_SERVER['PHP_SELF'] !== "edit_products.php")) : ?>
-                            <button class="btn btn-primary float-end">Add To Cart</button>
+                        <?php if (basename($_SERVER['PHP_SELF']) !== "list_products.php" && basename($_SERVER['PHP_SELF']) !== "edit_products.php") : ?>
+                            <form method="POST">
+                                <input type="hidden" name="id" value="<?php se($item, "id") ?>">
+                                <input type="submit" class="btn btn-primary float-end" value="Add To Cart" name="add">
+                            </form>
                         <?php endif ?>
                     </div>
                 </div>
