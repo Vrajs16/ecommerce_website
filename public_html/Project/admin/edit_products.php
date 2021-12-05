@@ -10,7 +10,6 @@ if (!has_role("Admin")) {
 $results = array(0 => array("name" => "", "description" => "", "stock" => "", "unit_price" => "", "category" => "", "visibility" => "",));
 if (isset($_POST["update"])) {
     $id = se($_POST, "id", "", false);
-    $id = 4;
     $name = se($_POST, "name", "", false);
     $desc = se($_POST, "description", "", false);
     $category = se($_POST, "category", "", false);
@@ -100,7 +99,7 @@ if (isset($_POST["edit"]) && isset($_POST["id"])) {
                 <?php endif ?>
 
             </div>
-            <input type="hidden" value="<?php se($item, "id"); ?>" />
+            <input type="hidden" name="id" value="<?php se($item, "id"); ?>" />
             <input type="submit" class="btn btn-primary" value="Update Product" name="update" />
         </form>
     <?php endforeach ?>
