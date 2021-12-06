@@ -191,7 +191,7 @@ if (isset($_POST["minus"])) {
 if (is_logged_in()) {
     $db = getDB();
     $userid = se(get_user_id(), null, "", false); //User id
-    $query3 = "SELECT Cart.product_id, Cart.unit_cost, Cart.desired_quantity, Products.name, Products.id FROM Cart, Products where user_id=:userid and Cart.product_id=Products.id";
+    $query3 = "SELECT Cart.product_id, Cart.unit_cost, Cart.desired_quantity, Products.name, Products.id, Products.name, Products.description, Products.stock, Products.unit_price, Products.category, Products.visibility FROM Cart, Products where user_id=:userid and Cart.product_id=Products.id";
     $stmt = $db->prepare($query3); //dynamically generated query
     try {
         $stmt->execute([":userid" => $userid],);
@@ -236,9 +236,12 @@ require_once(__DIR__ . "/../../partials/flash.php");
                                         <input type="submit" class=" float-start btn btn-danger" value="Remove" name="remove_product">
                                     </form>
                                     <div class="float-start"> <?php se($item, "name") ?></div>
-                                    <div class="float-end  "> $<?php echo se($item, "unit_cost", "", false) * se($item, "desired_quantity", "", false) ?> </div><br><br>
-
-                                    <form method="POST" action="/Project/shop.php">
+                                    <!-- Button trigger modal -->
+                                    <div class="float-end  "> $<?php echo se($item, "unit_cost", "", false) * se($item, "desired_quantity", "", false) ?> </div><br>
+                                    <button type="button" class="btn btn-info float-end" data-bs-target="#MoreDetails<?php se($item, "id") ?>" data-bs-toggle="modal" data-bs-dismiss="modal">
+                                        More Details
+                                    </button>
+                                    <form method="POST" action="/Project/shop.php"><br>
                                         <input type="hidden" name="name" value="<?php se($item, "name") ?>">
                                         <input type="hidden" name="prodid" value="<?php se($item, "product_id") ?>">
                                         <input type="submit" class="btn btn-secondary" value="-" name="minus"></input>
@@ -266,3 +269,30 @@ require_once(__DIR__ . "/../../partials/flash.php");
         </div>
     </div>
 <?php endif ?>
+
+<?php foreach ($cartRes as $item) : ?>
+    <!-- Modal -->
+    <div class="modal fade" id="MoreDetails<?php se($item, "id") ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"><?php se($item, "name"); ?></h5>
+                    <button type="button" class="btn-close" data-bs-target="#ShoppingCart" data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php if (has_role("Admin")) : ?>
+                        <form method="POST" action="/Project/admin/edit_products.php">
+                            <input type="hidden" name="id" value="<?php se($item, "id") ?>">
+                            <input type="submit" class="btn btn-light float-end" value="Edit" name="edit">
+                        </form>
+                    <?php endif ?>
+                    <p> Id: <?php se($item, "id"); ?> </p>
+                    <p> Price: <?php se($item, "unit_price"); ?></p>
+                    <p> Description: <?php se($item, "description"); ?></p>
+                    <p> Stock: <?php se($item, "stock"); ?></p>
+                    <p> Category: <?php se($item, "category"); ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach ?>
