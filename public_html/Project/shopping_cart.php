@@ -237,6 +237,7 @@ require_once(__DIR__ . "/../../partials/flash.php");
                                     </form>
                                     <div class="float-start"> <?php se($item, "name") ?></div>
                                     <div class="float-end  "> $<?php echo se($item, "unit_cost", "", false) * se($item, "desired_quantity", "", false) ?> </div><br><br>
+
                                     <form method="POST" action="/Project/shop.php">
                                         <input type="hidden" name="name" value="<?php se($item, "name") ?>">
                                         <input type="hidden" name="prodid" value="<?php se($item, "product_id") ?>">
