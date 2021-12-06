@@ -1,6 +1,6 @@
 create table if not exists `Products` (
     `id` int auto_increment not null,
-    `name` varchar(20) not null unique,
+    `name` varchar(75) not null unique,
     `description` varchar(500) default '',
     `category` varchar(50) not null,
     `stock` int not null default 0,
