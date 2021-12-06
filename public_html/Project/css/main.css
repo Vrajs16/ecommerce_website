@@ -1,0 +1,117 @@
+@import "./background.css";
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+.companies-container {
+  margin: auto;
+  max-width: 720px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-bottom: 3rem;
+}
+.company-container {
+  position: relative;
+  height: 70px;
+  width: 120px;
+  margin: 10px;
+  flex: 0 0 7.8rem;
+}
+.company-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px solid black;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  background-size: 90%;
+  align-items: center;
+  text-align: center;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.c1 {
+  background-image: url(../Images/Amazon\ Logo.jpeg);
+}
+.c2 {
+  background-image: url(../Images/Ebay\ Logo.jpeg);
+}
+.c3 {
+  background-image: url(../Images/Walmart\ Logo.jpeg);
+}
+.c4 {
+  background-image: url(../Images/BestBuy\ Logo.jpeg);
+}
+.c5 {
+  background-image: url(../Images/ShopRite\ Logo.jpeg);
+}
+.c6 {
+  background-image: url(../Images/Costco\ Logo.jpeg);
+}
+.c7 {
+  background-image: url(../Images/Lowes\ Logo.jpeg);
+}
+.c8 {
+  background-image: url(../Images/HomdeDepot\ Logo.jpeg);
+}
+.c9 {
+  background-image: url(../Images/Target\ Logo.jpeg);
+}
+.c1:hover,
+.c2:hover,
+.c3:hover,
+.c4:hover,
+.c5:hover,
+.c6:hover,
+.c7:hover,
+.c8:hover,
+.c9:hover {
+  background-color: rgb(220, 220, 220);
+  transition: 300ms ease-in-out;
+}
+
+.message-info {
+  font-size: 2rem;
+  padding: 3rem 1rem 0rem 1rem;
+  text-align: center;
+}
+.message2-info {
+  font-size: 2rem;
+  padding: 2rem 1rem 0rem 1rem;
+  text-align: center;
+}
+.search-container {
+  text-align: center;
+  position: relative;
+  margin-top: 3rem;
+}
+
+.search-area {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 720px;
+  min-width: 320px;
+}
+.input-search {
+  background-color: var(--color3);
+  font-size: 1.25rem;
+  text-align: center;
+  outline: none;
+  max-width: 800px;
+  width: 95%;
+  height: 50px;
+  border: none;
+  border-radius: 2rem;
+}
