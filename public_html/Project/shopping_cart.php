@@ -270,29 +270,31 @@ require_once(__DIR__ . "/../../partials/flash.php");
     </div>
 <?php endif ?>
 
-<?php foreach ($cartRes as $item) : ?>
-    <!-- Modal -->
-    <div class="modal fade" id="MoreDetails<?php se($item, "id") ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"><?php se($item, "name"); ?></h5>
-                    <button type="button" class="btn-close" data-bs-target="#ShoppingCart" data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <?php if (has_role("Admin")) : ?>
-                        <form method="POST" action="/Project/admin/edit_products.php">
-                            <input type="hidden" name="id" value="<?php se($item, "id") ?>">
-                            <input type="submit" class="btn btn-light float-end" value="Edit" name="edit">
-                        </form>
-                    <?php endif ?>
-                    <p> Id: <?php se($item, "id"); ?> </p>
-                    <p> Price: <?php se($item, "unit_price"); ?></p>
-                    <p> Description: <?php se($item, "description"); ?></p>
-                    <p> Stock: <?php se($item, "stock"); ?></p>
-                    <p> Category: <?php se($item, "category"); ?></p>
+<?php if (is_logged_in() && isset($cartRes)) : ?>
+    <?php foreach ($cartRes as $item) : ?>
+        <!-- Modal -->
+        <div class="modal fade" id="MoreDetails<?php se($item, "id") ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"><?php se($item, "name"); ?></h5>
+                        <button type="button" class="btn-close" data-bs-target="#ShoppingCart" data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <?php if (has_role("Admin")) : ?>
+                            <form method="POST" action="/Project/admin/edit_products.php">
+                                <input type="hidden" name="id" value="<?php se($item, "id") ?>">
+                                <input type="submit" class="btn btn-light float-end" value="Edit" name="edit">
+                            </form>
+                        <?php endif ?>
+                        <p> Id: <?php se($item, "id"); ?> </p>
+                        <p> Price: <?php se($item, "unit_price"); ?></p>
+                        <p> Description: <?php se($item, "description"); ?></p>
+                        <p> Stock: <?php se($item, "stock"); ?></p>
+                        <p> Category: <?php se($item, "category"); ?></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-<?php endforeach ?>
+    <?php endforeach ?>
+<?php endif ?>
