@@ -1,6 +1,7 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,12 +13,15 @@ require(__DIR__ . "/../../partials/nav.php");
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/main.css">
     <title>shop.com</title>
+    <!-- <script src="./helpers.js"></script> -->
 </head>
 
 <body>
     <main>
-        <div class="message-info">
-            Search for an item and find the lowest price on it today!
+
+        <?php require(__DIR__ . "/shopping_cart.php") ?>
+        <div class=" message-info">
+            Search for an item!
         </div>
         <div class="message2-info">FILTER</div>
         <?php require(__DIR__ . "/filter.php") ?>
@@ -41,6 +45,8 @@ require(__DIR__ . "/../../partials/nav.php");
             <div class="company-container"><a href="https://www.homedepot.com" target="_blank"><button class="company-btn c8"></button></a></div>
             <div class="company-container"><a href="https://www.target.com" target="_blank"><button class="company-btn c9"></button></a></div>
         </div>
+
+
     </main>
 </body>
 
