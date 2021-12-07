@@ -171,47 +171,52 @@
 [https://github.com/Vrajs16/IT202-003/pull/88](https://github.com/Vrajs16/IT202-003/pull/88)</p></td></tr><tr><td><table><tr><td>F11 - User will be able to clear their entire cart via a button click<tr><td>Status: completed</td></tr><tr><td><img width="600px" src="https://user-images.githubusercontent.com/89588024/144931976-dded6714-9c59-4b5f-96c2-268d40696a4d.png"><p>The user is able to clear the entire cart with the empty cart button. The modal doesn't pop again if this is pressed.</td></tr></td></tr></table></td></tr></td></tr></table>
 
 - Milestone 3
+
   - [ ] \(mm/dd/yyyy of completion) User will be able to purchase items in their Cart
-  -  List of Evidence of Feature Completion
-    - Status: Incomplete
-    - Direct Link: 
-    - Pull Requests
-      - PR link #1: 
-    - Screenshots
-      - Screenshot #1: 
-        - Screenshot #1: 
+  - List of Evidence of Feature Completion
+  - Status: Incomplete
+  - Direct Link:
+  - Pull Requests
+    - PR link #1:
+  - Screenshots
+
+    - Screenshot #1:
+      - Screenshot #1:
 
   - [ ] \(mm/dd/yyyy of completion) Order Confirmation Page
-  -  List of Evidence of Feature Completion
-    - Status: Incomplete
-    - Direct Link: 
-    - Pull Requests
-      - PR link #1: 
-    - Screenshots
-      - Screenshot #1: 
-        - Screenshot #1: 
+  - List of Evidence of Feature Completion
+  - Status: Incomplete
+  - Direct Link:
+  - Pull Requests
+    - PR link #1:
+  - Screenshots
+
+    - Screenshot #1:
+      - Screenshot #1:
 
   - [ ] \(mm/dd/yyyy of completion) User will be able to see their Purchase History
-  -  List of Evidence of Feature Completion
-    - Status: Incomplete
-    - Direct Link: 
-    - Pull Requests
-      - PR link #1: 
-    - Screenshots
-      - Screenshot #1: 
-        - Screenshot #1: 
+  - List of Evidence of Feature Completion
+  - Status: Incomplete
+  - Direct Link:
+  - Pull Requests
+    - PR link #1:
+  - Screenshots
+
+    - Screenshot #1:
+      - Screenshot #1:
 
   - [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all Purchase History
-  -  List of Evidence of Feature Completion
-    - Status: Incomplete
-    - Direct Link: 
-    - Pull Requests
-      - PR link #1: 
-    - Screenshots
-      - Screenshot #1: 
-        - Screenshot #1: 
+  - List of Evidence of Feature Completion
+  - Status: Incomplete
+  - Direct Link:
+  - Pull Requests
+    - PR link #1:
+  - Screenshots
+    - Screenshot #1:
+      - Screenshot #1:
 
 - Milestone 4
+<table><tr><td>Milestone4</td></tr><tr><td><table><tr><td>F1 - User can set their profile to be public or private (will need another column in Users table) ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F1 - If public, hide email address from other users<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F2 - User will be able to rate a product they purchased ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F2 - Create table called Ratings (id, product_id, user_id, rating, comment, created)<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F2 - 1-5 rating<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F2 - Text Comment (use TEXT data type in sql)<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F2 - Must be done on the Product Details Page<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F2 - Ratings and Rating Comments will be visible on the Product Details page<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F2 - Show the average rating on the Product Details Page<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F3 - User’s Purchase History Changes ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F3 - Filter by date range<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F3 - Filter by category<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F3 - Sort by total, date purchased, etc<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F3 - Add pagination<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F4 - Store Owner Purchase History Changes ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F4 - Filter by Date Range<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F4 - Filter by Category<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F4 - Sort by total, date purchased, etc<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F4 - Add pagination<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F4 - The result page should show the accurate total price of the combined search results (i.e., if just 3 records show each of $25, it should show $75 total for this view)<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F5 - Add pagination to Shop Page (and any other product lists not yet mentioned) ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F5 - Add pagination to Shop Page (and any other product lists not yet mentioned)<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F6 - Store Owner will be able to see all products out of stock ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F6 - This will be added as a filter to their product list page from Milestone 2<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F6 - Pagination should account for this new filter<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F6 - Recommended to have the filter applied as a given value (i.e., where quantity is <= value)<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F7 - User can sort products by average rating on the Shop Page ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F7 - Hint: may want to add an “average rating” field to the Products table and update this value any time a new rating is given for the product<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr></td></tr></table>
 
 ### Intructions
 
