@@ -259,10 +259,11 @@ require_once(__DIR__ . "/../../partials/flash.php");
                 </div>
                 <div class="modal-footer">
                     <form method="POST" action="/Project/shop.php">
-                        <input type="submit" class="m-2 float-start btn btn-danger" value="Empty Cart" name="empty_cart">
+                        <input type="submit" class="m-2 float-start btn btn-danger" value="Empty Cart" name="empty_cart" <?php echo ($sum == 0) ? "disabled" : "" ?>>
                     </form>
-                    <form method="POST" action="/Project/shop.php">
-                        <button type="submit" class="btn btn-primary float-end" data-bs-dismiss="modal">Checkout</button>
+                    <form method="POST" action="/Project/checkout.php">
+                        <input type="hidden" name="checkout" value="<?php echo get_user_id() ?>" />
+                        <input type="submit" class="btn btn-primary float-end" data-bs-dismiss="modal" value="Checkout" <?php echo ($sum == 0) ? "disabled" : "" ?>></input>
                     </form>
                 </div>
             </div>
