@@ -1,3 +1,15 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+html,
+body {
+  background-color: #f2ecd4;
+}
 .alert-success {
   background-color: green;
 }
@@ -13,7 +25,10 @@
 .alert-info {
   background-color: teal;
 }
-nav li {
+div {
+  word-wrap: break-word;
+}
+/* nav li {
   display: inline;
   background-color: rebeccapurple;
 }
@@ -44,4 +59,4 @@ body {
 .login:hover {
   transition: ease-in-out 0.25s;
   background-color: gray;
-}
+} */
