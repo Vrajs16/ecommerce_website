@@ -24,7 +24,7 @@ if (is_logged_in(true) && isset($_POST["checkout"])) :
             $desired_quan = intval(se($item, "desired_quantity", null, false));
             $stock = intval(se($item, "stock", null, false));
             $name = se($item, "name", null, false);
-            flash("We only have $stock $name's in stock. Please lower the amount from $desired_quan to a maximum $stock $name's", "danger");
+            flash("We only have $stock $name's in stock. Please lower the quantity from $desired_quan to a maximum $stock $name's that you can buy!", "danger");
             die(header("Location: /Project/shop.php"));
             require_once(__DIR__ . "/../../partials/flash.php");
         }
@@ -128,8 +128,8 @@ if (is_logged_in(true) && isset($_POST["checkout"])) :
 
                         <div class="row gy-3">
                             <div class="col-md-6">
-                                <label id="card-info-title" for="cc-number" class="form-label">Credit card number</label>
-                                <input oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Incorrect credit cart format, check again!')" pattern="[0-9]*" name="cc-number" type="text" class="form-control" id="cc-number" placeholder="" required="">
+                                <label id="card-info-title" for="amount" class="form-label">Credit card will be charged:</label>
+                                <input oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Incorrect credit cart format, check again!')" value="<?php se($amount) ?>" pattern="[0-9]*" name="amount" type="text" class="form-control" id="amount" placeholder="" readonly>
                             </div>
                         </div>
 
@@ -150,17 +150,14 @@ if (is_logged_in(true) && isset($_POST["checkout"])) :
             $('input[name="paymentMethod"]').on('click', function() {
                 console.log("hello world");
                 if ($(this).val() == 'Credit card') {
-                    document.getElementById('card-info-title').innerHTML = 'Credit card number';
-                    document.getElementById('cc-number').value = "";
-                    document.getElementById('cc-number').readOnly = false;
+                    document.getElementById('card-info-title').innerHTML = 'Credit card will be charged:';
+                    document.getElementById('amount').value = "<?php se($amount) ?>";
                 } else if ($(this).val() == 'Debit card') {
-                    document.getElementById('card-info-title').innerHTML = 'Debit card number';
-                    document.getElementById('cc-number').value = "";
-                    document.getElementById('cc-number').readOnly = false;
+                    document.getElementById('card-info-title').innerHTML = 'Debit card will be charged:';
+                    document.getElementById('amount').value = "<?php se($amount) ?>";
                 } else {
-                    document.getElementById('card-info-title').innerHTML = 'Cash total';
-                    document.getElementById('cc-number').readOnly = true;
-                    document.getElementById('cc-number').value = "<?php se($amount) ?>";
+                    document.getElementById('card-info-title').innerHTML = 'Amount to pay in cash:';
+                    document.getElementById('amount').value = "<?php se($amount) ?>";
                 }
             });
         });

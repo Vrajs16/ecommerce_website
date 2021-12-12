@@ -246,6 +246,7 @@ require_once(__DIR__ . "/../../partials/flash.php");
                                         <input type="hidden" name="prodid" value="<?php se($item, "product_id") ?>">
                                         <input type="submit" class="btn btn-secondary" value="-" name="minus"></input>
                                         <input type="number" name="inputQuant" value="<?php se($item, "desired_quantity") ?>">
+                                        <!-- <input onblur="this.form.submit()" type="number" name="inputQuant" value="<?php se($item, "desired_quantity") ?>"> -->
                                         <input type="submit" class="btn btn-secondary" name="plus" value="+"></input>
                                     </form>
                                     <br>
