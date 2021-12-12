@@ -29,7 +29,6 @@ if (is_logged_in(true) && isset($_POST["checking-out-order"])) :
         if ($r) {
             $cartInfoCurrent = $r;
         }
-        echo var_export($cartInfoCurrent);
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
@@ -44,9 +43,41 @@ if (is_logged_in(true) && isset($_POST["checking-out-order"])) :
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
+    $orderId = se($orderNum[0], "id", null, false);
+    foreach ($cartInfoCurrent as $cartCurr) {
+        try {
+            $productid = intval(se($cartCurr, "product_id", null, false));
+            $orderid = intval($orderId);
+            $quantity = intval(se($cartCurr, "desired_quantity", null, false));
+            $unit_price = intval(se($cartCurr, "unit_cost", null, false));
+            $q103 = "INSERT INTO OrderItems (product_id, order_id, quantity, unit_price) VALUES (:productid, :orderid, :quantity, :unit_price)";
+            $stmt = $db->prepare($q103);
+            $stmt->execute([":productid" => $productid, ":orderid" => $orderid, ":quantity" => $quantity, ":unit_price" => $unit_price]);
+        } catch (PDOException $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        }
+    }
 
+    $q104 = "DELETE FROM Cart where user_id=:userid";
+    $stmt = $db->prepare($q104);
+    try {
+        $stmt->execute([":userid" => $userid]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
 
-    
+    foreach ($cartInfoCurrent as $cartCurr) {
+        try {
+            $quantity = intval(se($cartCurr, "desired_quantity", null, false));
+            $productID = intval(se($cartCurr, "product_id", null, false));
+            $q105 = "UPDATE Products set stock = stock - :quantity where id=:product_id";
+            $stmt = $db->prepare($q105);
+            $stmt->execute([":quantity" => $quantity, ":product_id" => $productID]);
+        } catch (PDOException $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        }
+    }
 ?>
 <?php elseif (is_logged_in(true)) :
     flash("Please follow the checkout process from the shopping cart! Thank you!", "warning");
