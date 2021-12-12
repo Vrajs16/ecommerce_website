@@ -1,5 +1,5 @@
 <?php require(__DIR__ . "/../../partials/nav.php");
-if (is_logged_in(true) && isset($_POST["checkout"])) {
+if (is_logged_in(true) && isset($_POST["checkout"])) :
     $userid = se(get_user_id(), null, "", false); //User id
     $db = getDB();
     $checkoutSumQuery = "SELECT desired_quantity, unit_price, name, description, stock FROM Cart INNER JOIN Products ON Cart.product_id = Products.id where user_id=:userid";
@@ -18,10 +18,18 @@ if (is_logged_in(true) && isset($_POST["checkout"])) {
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
-};
-
-
-if (is_logged_in(true) && isset($_POST["checkout"])) : ?>
+    var_export($_POST);
+    foreach ($checkoutSummary as $item) {
+        if (intval(se($item, "desired_quantity", null, false)) > intval(se($item, "stock", null, false))) {
+            $desired_quan = intval(se($item, "desired_quantity", null, false));
+            $stock = intval(se($item, "stock", null, false));
+            $name = se($item, "name", null, false);
+            flash("We only have $stock $name's in stock. Please lower the amount from $desired_quan to a maximum $stock $name's", "danger");
+            die(header("Location: /Project/shop.php"));
+            require_once(__DIR__ . "/../../partials/flash.php");
+        }
+    }
+?>
     <div class="container">
         <main>
             <div class="py-5 text-center">
@@ -39,16 +47,16 @@ if (is_logged_in(true) && isset($_POST["checkout"])) : ?>
                         foreach ($checkoutSummary as $item) : ?>
                             <li class="list-group-item d-flex justify-content-between lh-sm">
                                 <div>
-                                    <h6 class="my-0"><?php se($item, "name") ?> x ( <?php se($item, "desired_quantity") ?> )</h6>
+                                    <h6 class="my-0"><?php se($item, "name") ?> x ( <strong><span class="text-success"><?php se($item, "desired_quantity") ?></span></strong> )</h6>
                                     <small class="text-muted"><?php se($item, "description") ?></small>
                                 </div>
-                                <span class="text-muted"><?php se($item, "unit_price");
-                                                            $amount += se($item, "unit_price", null, false)  ?></span>
+                                <span class="text-muted">$<?php se($item, "unit_price");
+                                                            $amount += se($item, "unit_price", null, false) * se($item, "desired_quantity", null, false) ?></span>
                             </li>
                         <?php endforeach ?>
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total (USD)</span>
-                            <strong><?php se($amount) ?></strong>
+                            <strong class="text-danger">$<?php se($amount) ?></strong>
                         </li>
                     </ul>
                 </div>
@@ -144,31 +152,26 @@ if (is_logged_in(true) && isset($_POST["checkout"])) : ?>
                 if ($(this).val() == 'Credit card') {
                     document.getElementById('card-info-title').innerHTML = 'Credit card number';
                     document.getElementById('cc-number').value = "";
+                    document.getElementById('cc-number').readOnly = false;
                 } else if ($(this).val() == 'Debit card') {
                     document.getElementById('card-info-title').innerHTML = 'Debit card number';
                     document.getElementById('cc-number').value = "";
+                    document.getElementById('cc-number').readOnly = false;
                 } else {
-                    document.getElementById('card-info-title').innerHTML = 'Cash Amount';
+                    document.getElementById('card-info-title').innerHTML = 'Cash total';
                     document.getElementById('cc-number').readOnly = true;
-                    document.getElementById('cc-number').value = "<?php echo 100 ?>";
+                    document.getElementById('cc-number').value = "<?php se($amount) ?>";
                 }
             });
         });
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
+<?php elseif (is_logged_in()) :
+    flash("Please use the checkout button in the shopping cart", "warning");
+    die(header("Location: /Project/shop.php"));
+    require_once(__DIR__ . "/../../partials/flash.php");
+?>
 <?php else :
-    flash("You have no items in your cart! Add items to checkout!", "warning");
+    flash("Login before checking out!", "warning");
     die(header("Location: /Project/shop.php"));
     require_once(__DIR__ . "/../../partials/flash.php");
 ?>
