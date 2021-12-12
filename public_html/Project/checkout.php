@@ -1,5 +1,4 @@
 <?php require(__DIR__ . "/../../partials/nav.php");
-
 if (is_logged_in(true) && isset($_POST["checkout"])) : ?>
     <div class="container">
         <main>
@@ -35,13 +34,6 @@ if (is_logged_in(true) && isset($_POST["checkout"])) : ?>
                             </div>
                             <span class="text-muted">$5</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <h6 class="my-0">Promo code</h6>
-                                <small>EXAMPLECODE</small>
-                            </div>
-                            <span class="text-success">−$5</span>
-                        </li>
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total (USD)</span>
                             <strong>$20</strong>
@@ -50,67 +42,46 @@ if (is_logged_in(true) && isset($_POST["checkout"])) : ?>
                 </div>
                 <div class="col-md-7 col-lg-8">
                     <h4 class="mb-3">Billing address</h4>
-                    <form class="needs-validation" novalidate>
+                    <form method="POST" action="/Project/confirmorder.php">
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <label for="firstName" class="form-label">First name</label>
-                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
+                                <input oninput="setCustomValidity('')" pattern="[A-Za-z ]*" oninvalid="this.setCustomValidity('Incorrect firstname, check again')" name="firstName" type="text" class="form-control" id="firstName" placeholder="" value="" required>
                             </div>
 
                             <div class="col-sm-6">
                                 <label for="lastName" class="form-label">Last name</label>
-                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid last name is required.
-                                </div>
+                                <input oninput="setCustomValidity('')" pattern="[A-Za-z ]*" oninvalid="this.setCustomValidity('Incorrect Lastname, check again!')" name="lastName" type="text" class="form-control" id="lastName" placeholder="" value="" required>
                             </div>
 
                             <div class="col-12">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Username" value="<?php se(ucfirst(get_username())) ?>" required readonly>
+                                <input oninput="setCustomValidity('')" type="text" class="form-control" id="username" placeholder="Username" value="<?php se(ucfirst(get_username())) ?>" disabled>
                             </div>
 
                             <div class=" col-12">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" value="<?php se(get_user_email()) ?>" readonly>
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address for shipping updates.
-                                </div>
+                                <input oninput="setCustomValidity('')" type="email" class="form-control" id="email" value="<?php se(get_user_email()) ?>" disabled>
                             </div>
 
                             <div class="col-12">
                                 <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Please enter your shipping address.
-                                </div>
+                                <input oninput="setCustomValidity('')" pattern="[A-Za-z0-9. ]*" oninvalid="this.setCustomValidity('Incorrect address, check again!')" name="address" type="text" class="form-control" id="address" placeholder="" required>
                             </div>
 
                             <div class="col-md-5">
                                 <label for="country" class="form-label">Country</label>
-                                <input type="text" class="form-control" id="country" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Please select a valid country.
-                                </div>
+                                <input oninput="setCustomValidity('')" pattern="[A-Za-z ]*" oninvalid="this.setCustomValidity('Incorrect country, check again!')" name="country" type="text" class="form-control" id="country" placeholder="" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="state" class="form-label">State</label>
-                                <input type="text" class="form-control" id="state" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Please provide a valid state.
-                                </div>
+                                <input oninput="setCustomValidity('')" pattern="[A-Za-z ]*" oninvalid="this.setCustomValidity('Incorrect State, check again!')" name="state" type="text" class="form-control" id="state" placeholder="" required>
                             </div>
 
                             <div class="col-md-3">
                                 <label for="zip" class="form-label">Zip</label>
-                                <input type="text" class="form-control" id="zip" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Zip code required.
-                                </div>
+                                <input oninput="setCustomValidity('')" pattern="[0-9]*" oninvalid="this.setCustomValidity('Incorrect Zip Code, check again!')" name="zip" type="text" class="form-control" id="zip" placeholder="" required>
                             </div>
                         </div>
 
@@ -136,16 +107,13 @@ if (is_logged_in(true) && isset($_POST["checkout"])) : ?>
                         <div class="row gy-3">
                             <div class="col-md-6">
                                 <label id="card-info-title" for="cc-number" class="form-label">Credit card number</label>
-                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Credit card number is required
-                                </div>
+                                <input oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Incorrect credit cart format, check again!')" pattern="[0-9]*" name="cc-number" type="text" class="form-control" id="cc-number" placeholder="" required="">
                             </div>
                         </div>
 
                         <hr class="my-4">
 
-                        <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                        <button class="w-100 btn btn-primary btn-lg" name="checking-out-order" value="submit" type="submit">Continue to checkout</button>
                     </form>
                 </div>
             </div>
@@ -156,40 +124,19 @@ if (is_logged_in(true) && isset($_POST["checkout"])) : ?>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function() {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('.needs-validation')
-
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-                .forEach(function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })
-
-
         $(function() {
             $('input[name="paymentMethod"]').on('click', function() {
                 console.log("hello world");
                 if ($(this).val() == 'Credit card') {
-                    $('#cc-number').show();
                     document.getElementById('card-info-title').innerHTML = 'Credit card number';
+                    document.getElementById('cc-number').value = "";
                 } else if ($(this).val() == 'Debit card') {
-                    $('#cc-number').show();
                     document.getElementById('card-info-title').innerHTML = 'Debit card number';
+                    document.getElementById('cc-number').value = "";
                 } else {
-                    document.getElementById('card-info-title').innerHTML = '';
-                    $('#cc-number').hide();
+                    document.getElementById('card-info-title').innerHTML = 'Cash Amount';
+                    document.getElementById('cc-number').readOnly = true;
+                    document.getElementById('cc-number').value = "<?php echo 100 ?>";
                 }
             });
         });

@@ -13,6 +13,7 @@ if (!has_role("Admin")) {
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/main.css">
 </head>
+<h1>List Products</h1>
 <div class="message2-info">FILTER</div>
 <?php require(__DIR__ . "/../filter.php") ?>
 <div class="message2-info">
