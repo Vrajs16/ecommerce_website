@@ -18,7 +18,7 @@ require(__DIR__ . "/../../partials/nav.php");
 
 <body>
     <main>
-
+        <h1>Shop</h1>
         <?php require(__DIR__ . "/shopping_cart.php") ?>
         <div class=" message-info">
             Search for an item!

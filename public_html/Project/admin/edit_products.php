@@ -57,7 +57,7 @@ if (isset($_POST["edit"]) && isset($_POST["id"])) {
 
 <div class="container-fluid">
     <?php foreach ($results as $item) : ?>
-        <h1>Update Products</h1>
+        <h1>Edit Products</h1>
         <form method="POST">
             <div class="mb-3">
                 <label class="form-label" for="name">Name</label>
