@@ -246,6 +246,7 @@ require_once(__DIR__ . "/../../partials/flash.php");
                                         <input type="hidden" name="prodid" value="<?php se($item, "product_id") ?>">
                                         <input type="submit" class="btn btn-secondary" value="-" name="minus"></input>
                                         <input type="number" name="inputQuant" value="<?php se($item, "desired_quantity") ?>">
+                                        <!-- <input onblur="this.form.submit()" type="number" name="inputQuant" value="<?php se($item, "desired_quantity") ?>"> -->
                                         <input type="submit" class="btn btn-secondary" name="plus" value="+"></input>
                                     </form>
                                     <br>
@@ -259,10 +260,11 @@ require_once(__DIR__ . "/../../partials/flash.php");
                 </div>
                 <div class="modal-footer">
                     <form method="POST" action="/Project/shop.php">
-                        <input type="submit" class="m-2 float-start btn btn-danger" value="Empty Cart" name="empty_cart">
+                        <input type="submit" class="m-2 float-start btn btn-danger" value="Empty Cart" name="empty_cart" <?php echo ($sum == 0) ? "disabled" : "" ?>>
                     </form>
-                    <form method="POST" action="/Project/shop.php">
-                        <button type="submit" class="btn btn-primary float-end" data-bs-dismiss="modal">Checkout</button>
+                    <form method="POST" action="/Project/checkout.php">
+                        <input type="hidden" name="checkout" value="<?php echo get_user_id() ?>" />
+                        <input type="submit" class="btn btn-primary float-end" data-bs-dismiss="modal" value="Checkout" <?php echo ($sum == 0) ? "disabled" : "" ?>></input>
                     </form>
                 </div>
             </div>
