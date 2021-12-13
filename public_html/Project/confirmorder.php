@@ -1,8 +1,5 @@
 <?php require(__DIR__ . "/../../partials/nav.php");
-
-echo var_export($_POST);
 if (is_logged_in(true) && isset($_POST["checking-out-order"])) :
-    echo var_export($_POST["checking-out-order"]);
     $userid = se(get_user_id(), "", null, false);
     $amount = se($_POST, "amount", null, false);
     $paymentMethod = se($_POST, "paymentMethod", null, false);
@@ -49,22 +46,13 @@ if (is_logged_in(true) && isset($_POST["checking-out-order"])) :
             $productid = intval(se($cartCurr, "product_id", null, false));
             $orderid = intval($orderId);
             $quantity = intval(se($cartCurr, "desired_quantity", null, false));
-            $unit_price = intval(se($cartCurr, "unit_cost", null, false));
+            $unit_price = floatval(se($cartCurr, "unit_cost", null, false));
             $q103 = "INSERT INTO OrderItems (product_id, order_id, quantity, unit_price) VALUES (:productid, :orderid, :quantity, :unit_price)";
             $stmt = $db->prepare($q103);
             $stmt->execute([":productid" => $productid, ":orderid" => $orderid, ":quantity" => $quantity, ":unit_price" => $unit_price]);
         } catch (PDOException $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
         }
-    }
-
-    $q104 = "DELETE FROM Cart where user_id=:userid";
-    $stmt = $db->prepare($q104);
-    try {
-        $stmt->execute([":userid" => $userid]);
-        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
     }
 
     foreach ($cartInfoCurrent as $cartCurr) {
@@ -78,7 +66,59 @@ if (is_logged_in(true) && isset($_POST["checking-out-order"])) :
             flash("<pre>" . var_export($e, true) . "</pre>");
         }
     }
+
+    $q106 = "SELECT Products.name ,total_price, payment_method, address , quantity, OrderItems.unit_price FROM Orders INNER JOIN OrderItems on Orders.id = OrderItems.order_id INNER JOIN Products on Products.id = OrderItems.product_id  where user_id=:userid and Orders.id =:orderid";
+    $stmt = $db->prepare($q106);
+    try {
+        $stmt->execute([":userid" => $userid, ":orderid" => intval($orderId)]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $orderDetails = $r;
+        }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+
+    $q104 = "DELETE FROM Cart where user_id=:userid";
+    $stmt = $db->prepare($q104);
+    try {
+        $stmt->execute([":userid" => $userid]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
 ?>
+    <div class="container-fluid ">
+        <h1>Order Confirmation Page</h1> <br>
+        <h2 class="text-center">Order Details</h2>
+        <div class="p-5 container justify-content-center h5">
+            <div class="float-start m-1">
+                Shipping to location:
+            </div><br>
+            <div class="float-end m-1">
+                <?php se($orderDetails[0], "address") ?>
+            </div><br>
+            <?php foreach ($orderDetails as $item) : ?>
+                <div class="float-start m-1">Item Purchased: </div><br>
+                <div class="float-end m-1"> <?php se($item, "name") ?></div><br>
+                <div class="float-start m-1">Quantity:</div><br>
+                <div class="float-end m-1"> <?php se($item, "quantity") ?></div><br>
+                <div class="float-start m-1">UnitCost:</div><br>
+                <div class="float-end m-1">$<?php se($item, "unit_price") ?></div><br>
+            <?php endforeach ?>
+            <div class="float-start m-1">Paid With:</div><br>
+            <div class="float-end m-1"> <?php se($orderDetails[0], "payment_method") ?></div><br>
+            <div class="float-start m-1"> Total Amount: </div><br>
+            <div class="float-end m-1">$<?php se($orderDetails[0], "total_price") ?></div><br>
+        </div>
+        <h3 class="text-center">Thank you for your purchase! Please shop again!</h3>
+        <div class="col text-center">
+            <button class="btn btn-primary p-2" onclick="location.href='/Project/shop.php';">Main Page</button>
+        </div>
+
+    </div>
+
+
 <?php elseif (is_logged_in(true)) :
     flash("Please follow the checkout process from the shopping cart! Thank you!", "warning");
     die(header("Location: /Project/shop.php"));
