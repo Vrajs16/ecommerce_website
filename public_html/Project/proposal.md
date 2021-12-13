@@ -170,46 +170,190 @@
 
 [https://github.com/Vrajs16/IT202-003/pull/88](https://github.com/Vrajs16/IT202-003/pull/88)</p></td></tr><tr><td><table><tr><td>F11 - User will be able to clear their entire cart via a button click<tr><td>Status: completed</td></tr><tr><td><img width="600px" src="https://user-images.githubusercontent.com/89588024/144931976-dded6714-9c59-4b5f-96c2-268d40696a4d.png"><p>The user is able to clear the entire cart with the empty cart button. The modal doesn't pop again if this is pressed.</td></tr></td></tr></table></td></tr></td></tr></table>
 
-- Milestone 3
-  - [ ] \(mm/dd/yyyy of completion) User will be able to purchase items in their Cart
-  -  List of Evidence of Feature Completion
-    - Status: Incomplete
-    - Direct Link: 
-    - Pull Requests
-      - PR link #1: 
-    - Screenshots
-      - Screenshot #1: 
-        - Screenshot #1: 
+<table>
+<tr><td>Milestone 3</td></tr><tr><td>
+<table>
+<tr><td>F1 - User will be able to purchase items in their Cart (2021-12-12)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
 
-  - [ ] \(mm/dd/yyyy of completion) Order Confirmation Page
-  -  List of Evidence of Feature Completion
-    - Status: Incomplete
-    - Direct Link: 
-    - Pull Requests
-      - PR link #1: 
-    - Screenshots
-      - Screenshot #1: 
-        - Screenshot #1: 
+[https://vas4-prod.herokuapp.com/Project/shopping_cart.php](https://vas4-prod.herokuapp.com/Project/shopping_cart.php)</p></td></tr>
 
-  - [ ] \(mm/dd/yyyy of completion) User will be able to see their Purchase History
-  -  List of Evidence of Feature Completion
-    - Status: Incomplete
-    - Direct Link: 
-    - Pull Requests
-      - PR link #1: 
-    - Screenshots
-      - Screenshot #1: 
-        - Screenshot #1: 
+<tr><td>PRs:<p>
 
-  - [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all Purchase History
-  -  List of Evidence of Feature Completion
-    - Status: Incomplete
-    - Direct Link: 
-    - Pull Requests
-      - PR link #1: 
-    - Screenshots
-      - Screenshot #1: 
-        - Screenshot #1: 
+[https://github.com/Vrajs16/IT202-003/pull/104](https://github.com/Vrajs16/IT202-003/pull/104)</p></td></tr>
+
+<tr><td>
+<table>
+<tr><td>F1 - Create an Orders table (id, user_id, created, total_price, address, payment_method)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/145899237-e770f0bb-12f6-4d00-ae15-3912ed62fa48.png">
+<p>This image shows the orders table in action with the latest order used in the following subitems for this feature.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Create an OrderItems table (id, order_id, product_id, quantity, unit_price)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/145899355-77eeb0c0-d0d3-4219-a17b-a8b6ee94a2b3.png">
+<p>This image shows the orderItems table in action used in the following subitems for this feature.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Checkout Form</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/145898275-00031461-15c7-4a57-9fe4-ec6dee13a27e.png">
+<p>This is the checkout form with the correct regex checking for user input. Input it also checked when the form is submitted.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - User will be asked for their Address for shipping purposes</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/145898275-00031461-15c7-4a57-9fe4-ec6dee13a27e.png">
+<p>This image shows the address section of the checkout form. It is also has the correct regex checking.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Order process</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/145899749-c8011b69-be72-496a-a127-52b0add56a05.png">
+<p>This shows that the user cannot buy more than the amount of product in stock.
+
+Because it is hard to show, the unit_price is what is transferred to the checkout form not the cart value.
+
+Because it is hard to show, Also the Products table is updated when the purchase is successful.
+
+The following Feature's will also help support the above points.</p>
+
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F2 - Order Confirmation Page (2021-12-12)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+[https://vas4-prod.herokuapp.com/Project/confirmorder.php](https://vas4-prod.herokuapp.com/Project/confirmorder.php)</p></td></tr>
+
+<tr><td>PRs:<p>
+
+[https://github.com/Vrajs16/IT202-003/pull/105](https://github.com/Vrajs16/IT202-003/pull/105)</p></td></tr>
+
+<tr><td>
+<table>
+<tr><td>F2 - Show the entire order details from the Order and OrderItems table (similar to cart)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/145898303-c1be60e8-e1e1-4e2f-a86f-1b0e9084deda.png">
+<p>This shows the purchase order summary when the item is bought.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F3 - User will be able to see their Purchase History (2021-12-13)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+[https://vas4-prod.herokuapp.com/Project/purchasehistory.php](https://vas4-prod.herokuapp.com/Project/purchasehistory.php)</p></td></tr>
+
+<tr><td>PRs:<p>
+
+[https://github.com/Vrajs16/IT202-003/pull/106](https://github.com/Vrajs16/IT202-003/pull/106)</p></td></tr>
+
+<tr><td>
+<table>
+<tr><td>F3 - A list item can be clicked to view the full details in the Order Details Page </td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/145897944-631201bb-84ff-4257-8978-d649d4eb6c6f.png">
+<p>This is the purchase history where the user can see all their purchase history.
+
+In this photo you can see the the this order is the same as the one that admin can see as well.</p>
+
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F4 - Store Owner will be able to see all Purchase History (2021-12-13)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+[https://vas4-prod.herokuapp.com/Project/purchasehistory.php](https://vas4-prod.herokuapp.com/Project/purchasehistory.php)</p></td></tr>
+
+<tr><td>PRs:<p>
+
+[https://github.com/Vrajs16/IT202-003/pull/106](https://github.com/Vrajs16/IT202-003/pull/106)</p></td></tr>
+
+<tr><td>
+<table>
+<tr><td>F4 - A list item can be clicked to view the full details in the Order Details Page </td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/145897625-08ab5de2-3be5-41ae-a97b-4191c803fa1b.png">
+<p>This is the purchase history where the admin can see all the purchases any user has made.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr></td></tr></table>
 
 - Milestone 4
 
