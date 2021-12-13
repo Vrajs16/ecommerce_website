@@ -18,7 +18,7 @@ if (is_logged_in(true) && isset($_POST["checkout"])) :
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
-    var_export($_POST);
+
     foreach ($checkoutSummary as $item) {
         if (intval(se($item, "desired_quantity", null, false)) > intval(se($item, "stock", null, false))) {
             $desired_quan = intval(se($item, "desired_quantity", null, false));
