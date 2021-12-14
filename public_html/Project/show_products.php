@@ -1,9 +1,6 @@
 <div class="container-fluid">
     <div class="row row-cols-1 row-cols-lg-3 g-5 justify-content-center ">
         <?php foreach ($results as $item) : ?>
-            <?php if (se($item, "visibility", "", false) === "0" && !has_role("Admin")) : ?>
-                <?php continue; ?>
-            <?php endif ?>
             <div class="col">
                 <div class="card h-100 bg-light p-1">
                     <div class=" card-header fs-4">
@@ -16,6 +13,9 @@
                         <?php se($item, "name"); ?>
                     </div>
                     <div class="card-body h-100">
+                        <?php if (se($item, "stock", null, false) <= 0) : ?>
+                            <p class="card-text h5">(<span class="text-danger h5"><strong>Out Of Stock</strong></span>)</p>
+                        <?php endif ?>
                         <p class="card-text ">Description: <br><?php se($item, "description"); ?></p>
                         <?php require(__DIR__ . "/more_details.php") ?>
                     </div>

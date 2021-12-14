@@ -19,6 +19,10 @@ $base_query = "SELECT id, name, description, stock, unit_price, category, visibi
 $total_query = "SELECT count(1) as total FROM Products WHERE ";
 $query = "1=1 ";
 $params = []; //define default params, add keys as needed and pass to execute
+if (!has_role("Admin")) {
+    $query .= " AND visibility = 1";
+    $query .= " AND stock > 0";
+}
 //apply name filter
 if (!empty($name)) {
     $query .= " AND name like :name";
