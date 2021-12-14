@@ -19,9 +19,9 @@ if (isset($_POST["save"])) {
         $hasError = true;
     }
     if (!$hasError) {
-        $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
+        $params = [":email" => $email, ":username" => $username, ":id" => get_user_id(), ":profile_type" => intval($_POST["flexRadioDefault"])];
         $db = getDB();
-        $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+        $stmt = $db->prepare("UPDATE Users set email = :email, username = :username, profile_type = :profile_type where id = :id");
         try {
             $stmt->execute($params);
         } catch (Exception $e) {
@@ -79,6 +79,19 @@ if (isset($_POST["save"])) {
         }
     }
 }
+$db = getDB();
+$userid = get_user_id();
+$q201 = "SELECT profile_type FROM Users where id = :userid LIMIT 1";
+$stmt = $db->prepare($q201);
+try {
+    $stmt->execute([":userid" => $userid]);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $userInfo = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
 ?>
 
 <?php
@@ -95,6 +108,16 @@ $username = get_username();
         <div class="mb-3">
             <label class="form-label" for="username">Username</label>
             <input class="form-control" type="text" name="username" id="username" value="<?php se($username); ?>" />
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault" value="1" <?php echo (se($userInfo[0], "profile_type", null, false) == 1) ? "checked" : "" ?>>
+                <label class="form-check-label" for="flexRadioDefault">Public</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="0" <?php echo (se($userInfo[0], "profile_type", null, false) == 0) ? "checked" : "" ?>>
+                <label class="form-check-label" for="flexRadioDefault1">Private</label>
+            </div>
         </div>
         <!-- DO NOT PRELOAD PASSWORD -->
         <div class="mb-3">Password Reset</div>
