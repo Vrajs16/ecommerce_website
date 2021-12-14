@@ -16,6 +16,7 @@ $name = se($_GET, "name", "", false);
 
 //split query into data and total
 $base_query = "SELECT id, name, description, stock, unit_price, category, visibility FROM Products WHERE ";
+$total_query = "SELECT count(1) as total FROM Products WHERE ";
 $query = "1=1 ";
 $params = []; //define default params, add keys as needed and pass to execute
 //apply name filter
@@ -28,8 +29,14 @@ if (!empty($col) && !empty($order)) {
     $query .= " ORDER BY $col $order"; //be sure you trust these values, I validate via the in_array checks above
 }
 
+//Paginate function
+$per_page = 3;
+paginate($total_query . $query, $params, $per_page);
+
 //get the records
-$query .= " limit 10";
+$query .= " limit :offset, :count";
+$params[":offset"] = $offset;
+$params[":count"] = $per_page;
 $stmt = $db->prepare($base_query . $query); //dynamically generated query
 foreach ($params as $key => $value) {
     $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;

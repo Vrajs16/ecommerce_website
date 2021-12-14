@@ -30,6 +30,7 @@ require(__DIR__ . "/../../partials/nav.php");
         </div>
         <?php
         require(__DIR__ . "/show_products.php");
+        require(__DIR__ . "/../../partials/pagination.php");
         ?>
         <div class="message2-info">
             Look for items at these websites!
