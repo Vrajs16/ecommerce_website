@@ -108,7 +108,10 @@ if (isset($_POST["edit"]) && isset($_POST["id"])) {
 <div class="mt-5"></div>
 <?php require(__DIR__ . "/../filter.php"); ?>
 <div class="mt-5"></div>
-<?php require(__DIR__ . "/../show_products.php"); ?>
+<?php require(__DIR__ . "/../show_products.php");
+require(__DIR__ . "/../../../partials/pagination.php");
+?>
+
 <?php
 require_once(__DIR__ . "/../../../partials/flash.php");
 ?>
