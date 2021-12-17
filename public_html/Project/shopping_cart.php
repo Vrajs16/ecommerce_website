@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == "/Project/more_details.php") {
+if ($_SERVER['REQUEST_URI'] == "/Project/shopping_cart.php") {
     header("Location: /Project/shop.php");
 }
 ?>
