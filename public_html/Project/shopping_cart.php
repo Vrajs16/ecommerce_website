@@ -1,4 +1,9 @@
 <?php
+if ($_SERVER['REQUEST_URI'] == "/Project/more_details.php") {
+    header("Location: /Project/shop.php");
+}
+?>
+<?php
 echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>';
 if (isset($_POST["add_to_cart"])) {
     if (!is_logged_in()) {

@@ -1,3 +1,8 @@
+<?php
+if ($_SERVER['REQUEST_URI'] == "/Project/more_details.php") {
+    header("Location: /Project/shop.php");
+}
+?>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-info float-end" data-bs-toggle="modal" data-bs-target="#modal<?php se($item, "id"); ?>">
     More Details
@@ -22,8 +27,15 @@
                 <p> Description: <?php se($item, "description"); ?></p>
                 <p> Stock: <?php se($item, "stock"); ?></p>
                 <p> Category: <?php se($item, "category"); ?></p>
-
             </div>
+            <div class="modal-footer justify-content-center h5">
+                <p>Ratings</p>
+            </div>
+            <hr>
+            <div class="modal-body justify-content-center text-center align-items-center">
+                <p>Comments here</p>
+            </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
