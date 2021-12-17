@@ -68,13 +68,27 @@ if ($_SERVER['REQUEST_URI'] == "/Project/more_details.php") {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <p class="text-center h5">Details</p>
+                <?php if (has_role("Admin")) : ?>
+                    <form method="POST" action="/Project/admin/edit_products.php">
+                        <input type="hidden" name="id" value="<?php se($item, "id") ?>">
+                        <input type="submit" class="btn btn-light float-end" value="Edit" name="edit">
+                    </form>
+                <?php endif ?>
+                <p> Id: <?php se($item, "id"); ?> </p>
+                <p> Price: <?php se($item, "unit_price"); ?></p>
+                <p> Description: <?php se($item, "description"); ?></p>
+                <p> Stock: <?php se($item, "stock"); ?></p>
+                <p> Category: <?php se($item, "category"); ?></p>
+                <hr>
                 <p class="text-center h5">Product Rating</p>
                 <div class="justify-content-center text-center">
-                    <span class="fas fa-star  fa-1x" style="color:#ffe234;"></span>
-                    <span class="fas fa-star" style="color:#ffe234;"></span>
-                    <span class="fas fa-star" style="color:#ffe234;"></span>
-                    <span class="fas fa-star" style="color:#ffe234;"></span>
-                    <span class="fas fa-star-half-alt" style="color:#ffe234;"></span>
+                    <span class="fas fa-star  fa-1x" style="color:#ddd;"></span>
+                    <span class="fas fa-star" style="color:#ddd;"></span>
+                    <span class="fas fa-star" style="color:#ddd;"></span>
+                    <span class="fas fa-star" style="color:#ddd;"></span>
+                    <span class="fas fa-star" style="color:#ddd;"></span><br>
+                    <span class="ml-2">4.5</span>
                 </div>
                 <hr>
                 <p class="text-center h5">Your Rating</p>
@@ -90,26 +104,17 @@ if ($_SERVER['REQUEST_URI'] == "/Project/more_details.php") {
                     </div>
                 </form>
                 <hr>
-                <p class="text-center h5">Details</p><br>
-                <?php if (has_role("Admin")) : ?>
-                    <form method="POST" action="/Project/admin/edit_products.php">
-                        <input type="hidden" name="id" value="<?php se($item, "id") ?>">
-                        <input type="submit" class="btn btn-light float-end" value="Edit" name="edit">
-                    </form>
-                <?php endif ?>
-                <p> Id: <?php se($item, "id"); ?> </p>
-                <p> Price: <?php se($item, "unit_price"); ?></p>
-                <p> Description: <?php se($item, "description"); ?></p>
-                <p> Stock: <?php se($item, "stock"); ?></p>
-                <p> Category: <?php se($item, "category"); ?></p>
-                <hr>
-                <p class="text-center h5">Comments</p><br>
-                <hr>
+                <p class="text-center h5">Comments</p>
+                <?php for ($x = 0; $x <= 10; $x++) { ?>
+                    <div style="border:2px solid black; padding:5px;margin:5px;">
+                        <p>Comment <?php echo ($x) ?></p>
+                    </div>
+                <?php } ?>
+                <br>
                 <form action="/Project/shop.php" method="POST">
                     <div class="form-group row text-center">
                         <div class="col-xs-2">
-                            <label for="message-text" class="col-form-label">Add a comment</label>
-                            <input type="text" class="form-control" id="message-text" name="comment-text"></input>
+                            <input type="text" class="form-control mb-2" id="message-text" name="comment-text" placeholder="Add a comment..."></input>
                             <input type="submit" class="btn btn-primary" name="comment" value="Comment" />
                         </div>
                     </div>
