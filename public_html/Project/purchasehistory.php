@@ -1,7 +1,18 @@
 <?php require(__DIR__ . "/../../partials/nav.php");
 if (is_logged_in(true)) {
-    $userid = se(get_user_id(), null, "", false); //User id
     $db = getDB();
+    $userid = se(get_user_id(), null, "", false); //User id
+    $name = se($_GET, "name", "", false);
+    $col = se($_GET, "col", "", false);
+    //allowed list
+    if (!in_array($col, ["total", "date"])) {
+        $col = "total"; //default value, prevent sql injection
+    }
+    $order = se($_GET, "order", "asc", false);
+    //allowed list
+    if (!in_array($order, ["asc", "desc"])) {
+        $order = "asc"; //default value, prevent sql injection
+    }
     $q110 = "SELECT Products.name ,total_price, payment_method, address , quantity, OrderItems.unit_price, Orders.id as order_number FROM Orders INNER JOIN OrderItems on Orders.id = OrderItems.order_id INNER JOIN Products on Products.id = OrderItems.product_id ";
     if (!has_role("Admin")) {
         $q110 .= " where Orders.user_id =:userid";
@@ -36,6 +47,68 @@ if (isset($purchaseInfo)) :
     } else {
         echo "<h1>Purchase History</h1>";
     } ?>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/background.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/main.css">
+        <title>shop.com</title>
+        <!-- <script src="./helpers.js"></script> -->
+    </head>
+    <div class="message2-info">FILTER</div>
+    <script src="https://kit.fontawesome.com/6d0e983cff.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <form class="row row-cols-auto g-3 align-items-center justify-content-center">
+        <div class="col">
+            <div class="input-group">
+                <div class="input-group-text">Search</div>
+                <input class="form-control" name="name" value="<?php se($name); ?>" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <div class="input-group-text">Date-Range</div>
+                <input id="startDate" type="date" class="form-control" name="startDate" value="" />
+            </div>
+            <div class="input-group">
+                <div class="input-group-text">To</div>
+                <input id="endDate" type="date" class="form-control" name="endDate" value="" />
+            </div>
+        </div>
+        <div class=" col col-md-6">
+            <div class="input-group">
+                <div class="input-group-text">Sort By</div>
+                <!-- make sure these match the in_array filter above-->
+                <select class="form-control" name="col" value="<?php se($col); ?>">
+                    <option value="total">Total</option>
+                    <option value="date">Date</option>
+                </select>
+                <script>
+                    //quick fix to ensure proper value is selected since
+                    //value setting only works after the options are defined and php has the value set prior
+                    document.forms[0].col.value = "<?php se($col); ?>";
+                </script>
+                <select class="form-control" name="order" value="<?php se($order); ?>">
+                    <option value="asc">Low-High</option>
+                    <option value="desc">High-Low</option>
+                </select>
+
+                <script>
+                    //quick fix to ensure proper value is selected since
+                    //value setting only works after the options are defined and php has the value set prior
+                    document.forms[0].order.value = "<?php se($order); ?>";
+                </script>
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <input type="submit" class="btn btn-primary" value="Apply" />
+            </div>
+        </div>
+    </form>
     <div class="accordion accordion-flush p-3" id="accordionFlushExample">
 
         <?php
@@ -111,3 +184,6 @@ if (isset($purchaseInfo)) :
 </div>
 </div>
 </div> -->
+<script>
+    $('#endDate').val(new Date().toISOString().slice(0, 10));
+</script>
