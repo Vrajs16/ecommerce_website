@@ -36,7 +36,7 @@ if (is_logged_in(true)) {
         $params[":category"] = $categoryForPurchase;
     }
     if (!empty($startDate) && !empty($endDate)) {
-        $query .= " and created BETWEEN :start AND :end";
+        $query .= " and Orders.created BETWEEN :start AND :end";
         $params[":start"] = $startDate;
         $params[":end"] = $endDate;
     }
