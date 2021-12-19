@@ -21,30 +21,14 @@ if (is_logged_in(true)) {
     if ($endDate == "") {
         $endDate = date("Y-m-d");
     }
-    $basequery110 = "SELECT Products.name ,total_price, payment_method, address , quantity, OrderItems.unit_price, Orders.id as order_number FROM Orders INNER JOIN OrderItems on Orders.id = OrderItems.order_id INNER JOIN Products on Products.id = OrderItems.product_id ";
+    $basequery110 = "SELECT Products.name ,total_price, payment_method, address , quantity, OrderItems.unit_price, Orders.id as order_number FROM Orders INNER JOIN OrderItems on Orders.id = OrderItems.order_id INNER JOIN Products on Products.id = OrderItems.product_id and ";
     $qcountPerOrder = "SELECT order_id, count(order_id) As countOf from OrderItems INNER JOIN Orders on Orders.id = order_id and ";
     $total_query = "SELECT count(1) as total FROM Orders WHERE ";
     $query = "1=1 ";
     $params = [];
-    $paramsCount = [];
     if (!has_role("Admin")) {
-        $basequery110 .= " and user_id = :userid";
         $query .= " and user_id = :userid";
         $params[":userid"] = (int) $userid;
-    }
-    $stmt = $db->prepare($basequery110); //dynamically generated query
-    foreach ($params as $key => $value) {
-        $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
-        $stmt->bindValue($key, $value, $type);
-    }
-    try {
-        $stmt->execute();
-        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($r) {
-            $purchaseInfo = $r;
-        }
-    } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
     }
 
     if (!empty($categoryForPurchase) && $categoryForPurchase != "na") {
@@ -60,15 +44,33 @@ if (is_logged_in(true)) {
     $qcountPerOrder .= $query . " Group by order_id";
     if (!empty($col) && !empty($order)) {
         $qcountPerOrder .= " ORDER BY $col $order";
-        $query .= " ORDER BY $col $order";
+        if ($col == "created") {
+            $query .= " ORDER BY Orders.$col $order";
+        } else {
+            $query .= " ORDER BY $col $order";
+        }
     }
 
     //Paginate function
-    $per_page = 3;
+    $per_page = 2;
     paginate($total_query . $query, $params, $per_page);
-
-    $stmt = $db->prepare($qcountPerOrder); //dynamically generated query
-    echo $stmt->debugDumpParams();
+    $stmt = $db->prepare($basequery110 . $query); //dynamically generated query
+    foreach ($params as $key => $value) {
+        $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+        $stmt->bindValue($key, $value, $type);
+    }
+    try {
+        $stmt->execute();
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $purchaseInfo = $r;
+        }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+    $params[":offset"] = $offset;
+    $params[":count"] = $per_page;
+    $stmt = $db->prepare($qcountPerOrder . " limit :offset, :count"); //dynamically generated query
     foreach ($params as $key => $value) {
         $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
         $stmt->bindValue($key, $value, $type);
@@ -82,30 +84,14 @@ if (is_logged_in(true)) {
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
-
-    //get the records
-    $query .= " limit :offset, :count";
-    $params[":offset"] = $offset;
-    $params[":count"] = $per_page;
-    $stmt = $db->prepare($total_query . $query); //dynamically generated query
-    foreach ($params as $key => $value) {
-        $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
-        $stmt->bindValue($key, $value, $type);
-    }
-    try {
-        $stmt->execute();
-        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($r) {
-            $test = $r;
-        }
-        echo var_export($test);
-    } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
-    }
 }
 
 
 if (isset($purchaseInfo)) :
+    echo '<pre>' . var_export($purchaseInfo, true) . '</pre>';
+    if (isset($countOf)) {
+        echo '<pre>' . var_export($countOf, true) . '</pre>';
+    }
     if (has_role("Admin")) {
         echo "<h1>All Purchase History</h1>";
     } else {
