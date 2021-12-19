@@ -52,7 +52,7 @@ if (is_logged_in(true)) {
     }
 
     //Paginate function
-    $per_page = 2;
+    $per_page = 3;
     paginate($total_query . $query, $params, $per_page);
     $stmt = $db->prepare($basequery110 . $query); //dynamically generated query
     foreach ($params as $key => $value) {
@@ -88,10 +88,6 @@ if (is_logged_in(true)) {
 
 
 if (isset($purchaseInfo)) :
-    echo '<pre>' . var_export($purchaseInfo, true) . '</pre>';
-    if (isset($countOf)) {
-        echo '<pre>' . var_export($countOf, true) . '</pre>';
-    }
     if (has_role("Admin")) {
         echo "<h1>All Purchase History</h1>";
     } else {
@@ -170,86 +166,61 @@ if (isset($purchaseInfo)) :
         </div>
     </form>
     <div class="message2-info">Orders</div>
-    <div class="accordion accordion-flush p-3" id="accordionFlushExample">
-
-        <?php
-        if (!isset($countOf)) {
-            echo "<div class='message2-info'>None</div>";
-        } else {
-            $ordNum = 1;
-            $cid = -1;
-            $count = 1;
-            $length = count($purchaseInfo);
-            $end = true;
-            foreach ($purchaseInfo as $item) : ?>
-                <?php if ($cid != se($item, "order_number", null, false)) : ?>
-                    <?php $cid = se($item, "order_number", null, false) ?>
-                    <?php $end = false; ?>
-                    <div class="accordion-item">
-
-                        <h2 class="accordion-header" id="flush-heading<?php se($cid, "") ?>">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php se($cid, "") ?>" aria-expanded="false" aria-controls="flush-collapse<?php se($cid, "") ?>">
-                                <?php se($ordNum, "");
-                                $ordNum += 1; ?>
-                            </button>
-                        </h2>
-
-                        <div id="flush-collapse<?php se($cid, "") ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php se($cid, "") ?>" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                <div class="p-5 container justify-content-center h5">
+    <?php
+    if (!isset($countOf)) {
+        echo "<div class='message2-info'>None</div>";
+    } else { ?>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <?php
+            $ordNum = $offset + 1;
+            foreach ($countOf as $counter) : ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-heading<?php se($ordNum) ?>">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php se($ordNum) ?>" aria-expanded="false" aria-controls="flush-collapse<?php se($ordNum) ?>">
+                            <?php se($ordNum, ""); ?>
+                        </button>
+                    </h2>
+                    <div id="flush-collapse<?php se($ordNum) ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php se($ordNum) ?>" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="p-5 container justify-content-center h5">
+                                <?php
+                                $countForPurchase = 0;
+                                foreach ($purchaseInfo as $item) :
+                                    if (se($item, "order_number", null, false) != se($counter, "order_id", null, false)) {
+                                        $countForPurchase += 1;
+                                        continue;
+                                    }
+                                ?>
                                     <div class="float-start m-1">Shipping to location:</div><br>
                                     <div class="float-end m-1"><?php se($item, "address") ?></div><br>
-                                <?php endif ?>
-                                <?php if (!$end) : ?>
+
+                                    <?php for ($x = 0; $x < (int) se($counter, "countOf", null, false); $x += 1) : ?>
+                                        <div class="float-start m-1">Item Purchased: </div><br>
+                                        <div class="float-end m-1"> <?php se($purchaseInfo[$countForPurchase], "name") ?></div><br>
+                                        <div class="float-start m-1">Quantity:</div><br>
+                                        <div class="float-end m-1"> <?php se($purchaseInfo[$countForPurchase], "quantity") ?></div><br>
+                                        <div class="float-start m-1">UnitCost:</div><br>
+                                        <div class="float-end m-1">$<?php se($purchaseInfo[$countForPurchase], "unit_price") ?></div><br>
                                     <?php
-                                    if ($count < $length) {
-                                        ($purchaseInfo[$count]["order_number"] != $cid) ? $end = true : $end = false;
-                                    } else {
-                                        $end = true;
-                                    }
-                                    ?>
-                                    <div class="float-start m-1">Item Purchased: </div><br>
-                                    <div class="float-end m-1"> <?php se($item, "name") ?></div><br>
-                                    <div class="float-start m-1">Quantity:</div><br>
-                                    <div class="float-end m-1"> <?php se($item, "quantity") ?></div><br>
-                                    <div class="float-start m-1">UnitCost:</div><br>
-                                    <div class="float-end m-1">$<?php se($item, "unit_price") ?></div><br>
-                                <?php endif ?>
-                                <?php if ($end) : ?>
+                                        $countForPurchase += 1;
+                                    endfor ?>
+
                                     <div class="float-start m-1">Paid With:</div><br>
                                     <div class="float-end m-1"> <?php se($item, "payment_method") ?></div><br>
                                     <div class="float-start m-1"> Total Amount: </div><br>
                                     <div class="float-end m-1">$<?php se($item, "total_price") ?></div><br>
-                                </div>
+                                <?php break;
+                                endforeach ?>
                             </div>
                         </div>
                     </div>
-                <?php endif ?>
-                <?php $count += 1; ?>
+                </div>
+                <?php $ordNum += 1; ?>
             <?php endforeach ?>
-    </div>
-<?php require(__DIR__ . "/../../partials/pagination.php");
-        } ?>
-
-
+        </div>
+    <?php require(__DIR__ . "/../../partials/pagination.php");
+    } ?>
 <?php else : ?>
     <h1>Purchase History</h1>
-
     <div class="text-center">Purchase items for history!</div>
-
-    </div>
 <?php endif ?>
-
-
-<!-- <div class="float-start m-1">Paid With:</div><br>
-<div class="float-end m-1"> <?php se($item, "payment_method") ?></div><br>
-<div class="float-start m-1"> Total Amount: </div><br>
-<div class="float-end m-1">$<?php se($item, "total_price") ?></div><br>
-
-</div>
-</div>
-</div>
-</div> -->
-<!-- <script>
-    $('#endDate').val(new Date().toISOString().slice(0, 10));
-</script> -->
