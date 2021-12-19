@@ -2,41 +2,105 @@
 if (is_logged_in(true)) {
     $db = getDB();
     $userid = se(get_user_id(), null, "", false); //User id
-    $name = se($_GET, "name", "", false);
+
     $col = se($_GET, "col", "", false);
     //allowed list
-    if (!in_array($col, ["total", "date"])) {
-        $col = "total"; //default value, prevent sql injection
+    if (!in_array($col, ["total", "created"])) {
+        $col = "total_price"; //default value, prevent sql injection
     }
-    $order = se($_GET, "order", "asc", false);
+    $order = se($_GET, "order", "", false);
+
     //allowed list
     if (!in_array($order, ["asc", "desc"])) {
         $order = "asc"; //default value, prevent sql injection
     }
-    $q110 = "SELECT Products.name ,total_price, payment_method, address , quantity, OrderItems.unit_price, Orders.id as order_number FROM Orders INNER JOIN OrderItems on Orders.id = OrderItems.order_id INNER JOIN Products on Products.id = OrderItems.product_id ";
+    $categoryForPurchase = se($_GET, "category", "", false);
+    $startDate = se($_GET, "startDate", "", false);
+    $endDate = se($_GET, "endDate", "", false);
+
+    if ($endDate == "") {
+        $endDate = date("Y-m-d");
+    }
+    $basequery110 = "SELECT Products.name ,total_price, payment_method, address , quantity, OrderItems.unit_price, Orders.id as order_number FROM Orders INNER JOIN OrderItems on Orders.id = OrderItems.order_id INNER JOIN Products on Products.id = OrderItems.product_id ";
+    $qcountPerOrder = "SELECT order_id, count(order_id) As countOf from OrderItems INNER JOIN Orders on Orders.id = order_id and ";
+    $total_query = "SELECT count(1) as total FROM Orders WHERE ";
+    $query = "1=1 ";
+    $params = [];
+    $paramsCount = [];
     if (!has_role("Admin")) {
-        $q110 .= " where Orders.user_id =:userid";
-        $stmt = $db->prepare($q110); //dynamically generated query
-        try {
-            $stmt->execute([":userid" => $userid]);
-            $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if ($r) {
-                $purchaseInfo = $r;
-            }
-        } catch (PDOException $e) {
-            flash("<pre>" . var_export($e, true) . "</pre>");
+        $basequery110 .= " and user_id = :userid";
+        $query .= " and user_id = :userid";
+        $params[":userid"] = (int) $userid;
+    }
+    $stmt = $db->prepare($basequery110); //dynamically generated query
+    foreach ($params as $key => $value) {
+        $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+        $stmt->bindValue($key, $value, $type);
+    }
+    try {
+        $stmt->execute();
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $purchaseInfo = $r;
         }
-    } else {
-        $stmt = $db->prepare($q110); //dynamically generated query
-        try {
-            $stmt->execute();
-            $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if ($r) {
-                $purchaseInfo = $r;
-            }
-        } catch (PDOException $e) {
-            flash("<pre>" . var_export($e, true) . "</pre>");
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+
+    if (!empty($categoryForPurchase) && $categoryForPurchase != "na") {
+        $query .= " and payment_method = :category";
+        $params[":category"] = $categoryForPurchase;
+    }
+    if (!empty($startDate) && !empty($endDate)) {
+        $query .= " and created BETWEEN :start AND :end";
+        $params[":start"] = $startDate;
+        $params[":end"] = $endDate;
+    }
+    //apply column and order sort
+    $qcountPerOrder .= $query . " Group by order_id";
+    if (!empty($col) && !empty($order)) {
+        $qcountPerOrder .= " ORDER BY $col $order";
+        $query .= " ORDER BY $col $order";
+    }
+
+    //Paginate function
+    $per_page = 3;
+    paginate($total_query . $query, $params, $per_page);
+
+    $stmt = $db->prepare($qcountPerOrder); //dynamically generated query
+    echo $stmt->debugDumpParams();
+    foreach ($params as $key => $value) {
+        $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+        $stmt->bindValue($key, $value, $type);
+    }
+    try {
+        $stmt->execute();
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $countOf = $r;
         }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+
+    //get the records
+    $query .= " limit :offset, :count";
+    $params[":offset"] = $offset;
+    $params[":count"] = $per_page;
+    $stmt = $db->prepare($total_query . $query); //dynamically generated query
+    foreach ($params as $key => $value) {
+        $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+        $stmt->bindValue($key, $value, $type);
+    }
+    try {
+        $stmt->execute();
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $test = $r;
+        }
+        echo var_export($test);
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
     }
 }
 
@@ -64,27 +128,37 @@ if (isset($purchaseInfo)) :
     <form class="row row-cols-auto g-3 align-items-center justify-content-center">
         <div class="col">
             <div class="input-group">
-                <div class="input-group-text">Search</div>
-                <input class="form-control" name="name" value="<?php se($name); ?>" />
+                <div class="input-group-text">Date-Range</div>
+                <input id="startDate" type="date" class="form-control" name="startDate" value="<?php se($startDate) ?>" />
+            </div>
+            <div class="input-group">
+                <div class="input-group-text">To</div>
+                <input id="endDate" type="date" class="form-control" name="endDate" value="<?php se($endDate) ?>" />
             </div>
         </div>
         <div class="col">
             <div class="input-group">
-                <div class="input-group-text">Date-Range</div>
-                <input id="startDate" type="date" class="form-control" name="startDate" value="" />
+                <div class="input-group-text">Filter By</div>
+                <select class="form-control" name="category" value="<?php se($categoryForPurchase); ?>">
+                    <option value="na" readonly>Choose Below</option>
+                    <option value="cash">Cash</option>
+                    <option value="credit card">Credit card</option>
+                    <option value="debit card">Debit card</option>
+                </select>
             </div>
-            <div class="input-group">
-                <div class="input-group-text">To</div>
-                <input id="endDate" type="date" class="form-control" name="endDate" value="" />
-            </div>
+            <script>
+                //quick fix to ensure proper value is selected since
+                //value setting only works after the options are defined and php has the value set prior
+                document.forms[0].category.value = "<?php (se($categoryForPurchase, "", null, false) == "") ? se("na") : se($categoryForPurchase) ?>";
+            </script>
         </div>
         <div class=" col col-md-6">
             <div class="input-group">
                 <div class="input-group-text">Sort By</div>
                 <!-- make sure these match the in_array filter above-->
                 <select class="form-control" name="col" value="<?php se($col); ?>">
-                    <option value="total">Total</option>
-                    <option value="date">Date</option>
+                    <option value="total_price">Total</option>
+                    <option value="created">Date</option>
                 </select>
                 <script>
                     //quick fix to ensure proper value is selected since
@@ -109,61 +183,67 @@ if (isset($purchaseInfo)) :
             </div>
         </div>
     </form>
+    <div class="message2-info">Orders</div>
     <div class="accordion accordion-flush p-3" id="accordionFlushExample">
 
         <?php
-        $ordNum = 1;
-        $cid = -1;
-        $count = 1;
-        $length = count($purchaseInfo);
-        $end = true;
-        foreach ($purchaseInfo as $item) : ?>
-            <?php if ($cid != se($item, "order_number", null, false)) : ?>
-                <?php $cid = se($item, "order_number", null, false) ?>
-                <?php $end = false; ?>
-                <div class="accordion-item">
+        if (!isset($countOf)) {
+            echo "<div class='message2-info'>None</div>";
+        } else {
+            $ordNum = 1;
+            $cid = -1;
+            $count = 1;
+            $length = count($purchaseInfo);
+            $end = true;
+            foreach ($purchaseInfo as $item) : ?>
+                <?php if ($cid != se($item, "order_number", null, false)) : ?>
+                    <?php $cid = se($item, "order_number", null, false) ?>
+                    <?php $end = false; ?>
+                    <div class="accordion-item">
 
-                    <h2 class="accordion-header" id="flush-heading<?php se($cid, "") ?>">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php se($cid, "") ?>" aria-expanded="false" aria-controls="flush-collapse<?php se($cid, "") ?>">
-                            Order #<?php se($ordNum, "");
-                                    $ordNum += 1; ?>
-                        </button>
-                    </h2>
+                        <h2 class="accordion-header" id="flush-heading<?php se($cid, "") ?>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php se($cid, "") ?>" aria-expanded="false" aria-controls="flush-collapse<?php se($cid, "") ?>">
+                                <?php se($ordNum, "");
+                                $ordNum += 1; ?>
+                            </button>
+                        </h2>
 
-                    <div id="flush-collapse<?php se($cid, "") ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php se($cid, "") ?>" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <div class="p-5 container justify-content-center h5">
-                                <div class="float-start m-1">Shipping to location:</div><br>
-                                <div class="float-end m-1"><?php se($item, "address") ?></div><br>
-                            <?php endif ?>
-                            <?php if (!$end) : ?>
-                                <?php
-                                if ($count < $length) {
-                                    ($purchaseInfo[$count]["order_number"] != $cid) ? $end = true : $end = false;
-                                } else {
-                                    $end = true;
-                                }
-                                ?>
-                                <div class="float-start m-1">Item Purchased: </div><br>
-                                <div class="float-end m-1"> <?php se($item, "name") ?></div><br>
-                                <div class="float-start m-1">Quantity:</div><br>
-                                <div class="float-end m-1"> <?php se($item, "quantity") ?></div><br>
-                                <div class="float-start m-1">UnitCost:</div><br>
-                                <div class="float-end m-1">$<?php se($item, "unit_price") ?></div><br>
-                            <?php endif ?>
-                            <?php if ($end) : ?>
-                                <div class="float-start m-1">Paid With:</div><br>
-                                <div class="float-end m-1"> <?php se($item, "payment_method") ?></div><br>
-                                <div class="float-start m-1"> Total Amount: </div><br>
-                                <div class="float-end m-1">$<?php se($item, "total_price") ?></div><br>
+                        <div id="flush-collapse<?php se($cid, "") ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php se($cid, "") ?>" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="p-5 container justify-content-center h5">
+                                    <div class="float-start m-1">Shipping to location:</div><br>
+                                    <div class="float-end m-1"><?php se($item, "address") ?></div><br>
+                                <?php endif ?>
+                                <?php if (!$end) : ?>
+                                    <?php
+                                    if ($count < $length) {
+                                        ($purchaseInfo[$count]["order_number"] != $cid) ? $end = true : $end = false;
+                                    } else {
+                                        $end = true;
+                                    }
+                                    ?>
+                                    <div class="float-start m-1">Item Purchased: </div><br>
+                                    <div class="float-end m-1"> <?php se($item, "name") ?></div><br>
+                                    <div class="float-start m-1">Quantity:</div><br>
+                                    <div class="float-end m-1"> <?php se($item, "quantity") ?></div><br>
+                                    <div class="float-start m-1">UnitCost:</div><br>
+                                    <div class="float-end m-1">$<?php se($item, "unit_price") ?></div><br>
+                                <?php endif ?>
+                                <?php if ($end) : ?>
+                                    <div class="float-start m-1">Paid With:</div><br>
+                                    <div class="float-end m-1"> <?php se($item, "payment_method") ?></div><br>
+                                    <div class="float-start m-1"> Total Amount: </div><br>
+                                    <div class="float-end m-1">$<?php se($item, "total_price") ?></div><br>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php endif ?>
-            <?php $count += 1; ?>
-        <?php endforeach ?>
+                <?php endif ?>
+                <?php $count += 1; ?>
+            <?php endforeach ?>
     </div>
+<?php require(__DIR__ . "/../../partials/pagination.php");
+        } ?>
 
 
 <?php else : ?>
@@ -184,6 +264,6 @@ if (isset($purchaseInfo)) :
 </div>
 </div>
 </div> -->
-<script>
+<!-- <script>
     $('#endDate').val(new Date().toISOString().slice(0, 10));
-</script>
+</script> -->
