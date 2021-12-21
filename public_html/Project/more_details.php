@@ -2,10 +2,10 @@
 if ($_SERVER['REQUEST_URI'] == "/Project/more_details.php") {
     header("Location: /Project/shop.php");
 }
-$commentsQuery = "SELECT Users.username, comment, rating From Ratings INNER JOIN Users on product_id = :id and user_id = Users.id";
+$commentsQuery = "SELECT Users.username, comment, rating From Ratings INNER JOIN Users on product_id = :id and :userid = Users.id";
 $stmt = $db->prepare($commentsQuery); //dynamically generated query
 try {
-    $stmt->execute([":id" => se($item, "id", null, false)]);
+    $stmt->execute([":id" => se($item, "id", null, false), ":userid" => intval(get_user_id())]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $comments = $r;
@@ -16,23 +16,19 @@ try {
 
 ?>
 <style>
-    fieldset,
-    label {
+    .ratingLabel {
         margin: 0;
         padding: 0;
     }
 
     /****** Style Star Rating Widget *****/
 
-    .rating<?php se($item, "id"); ?> {
-        border: none;
-    }
 
-    .rating<?php se($item, "id"); ?>>.input<?php se($item, "id"); ?> {
+    .ratingInput {
         display: none;
     }
 
-    .rating<?php se($item, "id"); ?>>.label<?php se($item, "id"); ?>:before {
+    .ratingLabel:before {
         margin: 2px;
         font-size: 1em;
         font-family: 'Font Awesome\ 5 Free';
@@ -40,30 +36,17 @@ try {
         content: "\f005";
     }
 
-    .rating<?php se($item, "id"); ?>>.label<?php se($item, "id"); ?> {
+    .ratingLabel {
         color: #ddd;
         float: right;
     }
 
     /***** CSS Magic to Highlight Stars on Hover *****/
-
-    .rating<?php se($item, "id"); ?>>.input<?php se($item, "id"); ?>:checked~.label<?php se($item, "id"); ?>,
     /* show gold star when clicked */
-    .rating<?php se($item, "id"); ?>:not(:checked)>.label<?php se($item, "id"); ?>:hover,
+    .ratingLabel:hover,
     /* hover current star */
-    .rating<?php se($item, "id"); ?>:not(:checked)>.label<?php se($item, "id"); ?>:hover~.label<?php se($item, "id"); ?> {
+    .ratingLabel:hover~.ratingLabel {
         color: #ffe234;
-    }
-
-    /* hover previous stars in list */
-
-    .rating<?php se($item, "id"); ?>>.input<?php se($item, "id"); ?>:checked+.label<?php se($item, "id"); ?>:hover,
-    /* hover current star when changing rating */
-    .rating<?php se($item, "id"); ?>>.input<?php se($item, "id"); ?>:checked~.label<?php se($item, "id"); ?>:hover,
-    .rating<?php se($item, "id"); ?>>.label<?php se($item, "id"); ?>:hover~.input<?php se($item, "id"); ?>:checked~.label<?php se($item, "id"); ?>,
-    /* lighten current selection */
-    .rating<?php se($item, "id"); ?>>.input<?php se($item, "id"); ?>:checked~.label<?php se($item, "id"); ?>:hover~.label<?php se($item, "id"); ?> {
-        color: #ffb000;
     }
 </style>
 <script src="https://kit.fontawesome.com/6d0e983cff.js" crossorigin="anonymous"></script>
@@ -104,22 +87,29 @@ try {
                 </div>
                 <hr>
                 <p class="text-center h5">Your Rating</p>
-                <form action="/Project/shop.php" method="POST">
+                <form action="./shop.php" name="form<?php se($item, "id") ?>" method="POST">
                     <div style="width:110px; margin:auto;">
-                        <fieldset class="rating<?php se($item, "id"); ?>">
-                            <input class="input<?php se($item, "id"); ?>" type="radio" id="star5" name="rating" value="5" /><label class="label<?php se($item, "id"); ?> fas fa-star" for="star5"></label>
-                            <input class="input<?php se($item, "id"); ?>" type="radio" id="star4" name="rating" value="4" /><label class="label<?php se($item, "id"); ?> fas fa-star" for="star4"></label>
-                            <input class="input<?php se($item, "id"); ?>" type="radio" id="star3" name="rating" value="3" /><label class="label<?php se($item, "id"); ?> fas fa-star" for="star3"></label>
-                            <input class="input<?php se($item, "id"); ?>" type="radio" id="star2" name="rating" value="2" /><label class="label<?php se($item, "id"); ?> fas fa-star" for="star2"></label>
-                            <input class="input<?php se($item, "id"); ?>" type="radio" id="star1" name="rating" value="1" /><label class="label<?php se($item, "id"); ?> fas fa-star" for="star1"></label>
-                        </fieldset>
+                        <input type="hidden" name="id" value=<?php se($item, "id"); ?>>
+                        <input class="ratingInput" onclick="document.form<?php se($item, 'id') ?>.submit()" type="radio" id="star5" name="rating" value="5" /><label class="ratingLabel fas fa-star" for="star5"></label>
+                        <input class="ratingInput" onclick="document.form<?php se($item, 'id') ?>.submit()" type="radio" id="star4" name="rating" value="4" /><label class="ratingLabel fas fa-star" for="star4"></label>
+                        <input class="ratingInput" onclick="document.form<?php se($item, 'id') ?>.submit()" type="radio" id="star3" name="rating" value="3" /><label class="ratingLabel fas fa-star" for="star3"></label>
+                        <input class="ratingInput" onclick="document.form<?php se($item, 'id') ?>.submit()" type="radio" id="star2" name="rating" value="2" /><label class="ratingLabel fas fa-star" for="star2"></label>
+                        <input class="ratingInput" onclick="document.form<?php se($item, 'id') ?>.submit()" type="radio" id="star1" name="rating" value="1" /><label class="ratingLabel fas fa-star" for="star1"></label>
                     </div>
+                    <?php
+                    if (isset($comments) && is_logged_in()) { ?>
+                        <p>Your rating is: <?php se($comments[0], "rating") ?></p>
+                    <?php } ?>
                 </form>
                 <hr>
                 <p class="text-center h5">Comments</p>
                 <?php
                 if (isset($comments) && se($item, "stock", null, false) > 0) { ?>
-                    <?php foreach ($comments as $x) : ?>
+                    <?php foreach ($comments as $x) :
+                        if (se($x, "comment", null, false) == "") {
+                            continue;
+                        }
+                    ?>
                         <div style="border:2px solid black; padding:5px;margin:5px;">
                             <p><?php echo ucfirst(se($x, "username", null, false)) ?>:<br><?php se($x, "comment") ?></p>
                         </div>
