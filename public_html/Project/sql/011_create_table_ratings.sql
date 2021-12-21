@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS Ratings(
     id INT AUTO_INCREMENT NOT NULL,
     product_id INT NOT NULL,
     user_id INT NOT NULL,
-    rating INT NOT NULL,
+    rating INT NOT NULL DEFAULT -1,
     comment TEXT NOT NULL,
     created timestamp default current_timestamp,
     PRIMARY KEY(id),

@@ -36,7 +36,7 @@ if (is_logged_in(true)) {
         $params[":category"] = $categoryForPurchase;
     }
     if (!empty($startDate) && !empty($endDate)) {
-        $query .= " and created BETWEEN :start AND :end";
+        $query .= " and Orders.created BETWEEN :start AND :end";
         $params[":start"] = $startDate;
         $params[":end"] = $endDate;
     }
@@ -104,6 +104,7 @@ if (isset($purchaseInfo)) :
         <title>shop.com</title>
         <!-- <script src="./helpers.js"></script> -->
     </head>
+    <h1 id="total_view"></h1>
     <div class="message2-info">FILTER</div>
     <script src="https://kit.fontawesome.com/6d0e983cff.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -173,6 +174,7 @@ if (isset($purchaseInfo)) :
         <div class="accordion accordion-flush" id="accordionFlushExample">
             <?php
             $ordNum = $offset + 1;
+            $totalAmount = 0;
             foreach ($countOf as $counter) : ?>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-heading<?php se($ordNum) ?>">
@@ -209,6 +211,7 @@ if (isset($purchaseInfo)) :
                                     <div class="float-end m-1"> <?php se($item, "payment_method") ?></div><br>
                                     <div class="float-start m-1"> Total Amount: </div><br>
                                     <div class="float-end m-1">$<?php se($item, "total_price") ?></div><br>
+                                    <?php $totalAmount += se($item, "total_price", null, false) ?>
                                 <?php break;
                                 endforeach ?>
                             </div>
@@ -218,9 +221,10 @@ if (isset($purchaseInfo)) :
                 <?php $ordNum += 1; ?>
             <?php endforeach ?>
         </div>
+        <script>
+            document.getElementById("total_view").innerText = "Total amount for this view: <?php se($totalAmount) ?>"
+        </script>
     <?php require(__DIR__ . "/../../partials/pagination.php");
-    } ?>
-<?php else : ?>
-    <h1>Purchase History</h1>
+    } ?> <?php else : ?> <h1>Purchase History</h1>
     <div class="text-center">Purchase items for history!</div>
 <?php endif ?>

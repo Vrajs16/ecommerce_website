@@ -57,6 +57,71 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
+if (isset($_POST["comment"]) && is_logged_in()) {
+    $id = se($_POST, "id", null, false);
+    $first  = '<script type="text/javascript">$(window).on("load", function() {$("#modal';
+    $first .= $id;
+    $first .= '").modal("show");});</script>';
+    if (trim($_POST["comment-text"]) != "") {
+        $userid = get_user_id();
+        $pid = $id;
+        $comment = se($_POST, "comment-text", null, false);
+        $commentQuery = "INSERT INTO Ratings (product_id, user_id, comment) VALUES (:pid, :userid, :comment)";
+        $stmt = $db->prepare($commentQuery); //dynamically generated query
+        try {
+            $stmt->execute([":pid" => $pid, ":userid" => $userid, ":comment" => $comment],);
+        } catch (PDOException $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        }
+        echo $first;
+    } else {
+        echo $first;
+    }
+}
+if (isset($_POST["rating"]) && is_logged_in()) {
+    echo var_export($_POST);
+    $id = se($_POST, "id", null, false);
+    $first  = '<script type="text/javascript">$(window).on("load", function() {$("#modal';
+    $first .= $id;
+    $first .= '").modal("show");});</script>';
+
+    $userid = get_user_id();
+    $pid = $id;
+    $rating = $_POST["rating"];
+    $ratingQuery = "Select count(*) as count From Ratings where user_id=:uid and product_id = :pid";
+    $stmt = $db->prepare($ratingQuery); //dynamically generated query
+    try {
+        $stmt->execute([":uid" => intval($userid), ":pid" => intval($pid),]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $countRatings = $r;
+        }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+    echo var_export($countRatings);
+    if ($countRatings[0]['count'] != "0") {
+        $ratingQuery = "Update Ratings set rating = :rating where user_id =:uid and product_id =:pid";
+        $stmt = $db->prepare($ratingQuery); //dynamically generated query
+        try {
+            $stmt->execute([":rating" => intval($rating), ":uid" => intval($userid), ":pid" => intval($pid)]);
+        } catch (PDOException $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        }
+        echo $first;
+    } else {
+        $ratingQuery2 = "INSERT INTO Ratings (product_id, user_id, comment, rating) VALUES (:pid, :userid, :comment, :rating)";
+        $stmt = $db->prepare($ratingQuery2); //dynamically generated query
+        try {
+            $stmt->execute([":pid" => intval($pid), ":userid" => intval($userid), ":comment" => "", ":rating" => intval($rating)],);
+        } catch (PDOException $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        }
+        echo $first;
+    }
+}
+
+
 ?>
 <form class="row row-cols-auto g-3 align-items-center justify-content-center">
     <div class="col">

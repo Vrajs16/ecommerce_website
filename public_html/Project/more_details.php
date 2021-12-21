@@ -2,25 +2,33 @@
 if ($_SERVER['REQUEST_URI'] == "/Project/more_details.php") {
     header("Location: /Project/shop.php");
 }
+$commentsQuery = "SELECT Users.username, comment, rating From Ratings INNER JOIN Users on product_id = :id and :userid = Users.id";
+$stmt = $db->prepare($commentsQuery); //dynamically generated query
+try {
+    $stmt->execute([":id" => se($item, "id", null, false), ":userid" => intval(get_user_id())]);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $comments = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+
 ?>
 <style>
-    fieldset,
-    label {
+    .ratingLabel {
         margin: 0;
         padding: 0;
     }
 
     /****** Style Star Rating Widget *****/
 
-    .rating {
-        border: none;
-    }
 
-    .rating>input {
+    .ratingInput {
         display: none;
     }
 
-    .rating>label:before {
+    .ratingLabel:before {
         margin: 2px;
         font-size: 1em;
         font-family: 'Font Awesome\ 5 Free';
@@ -28,30 +36,17 @@ if ($_SERVER['REQUEST_URI'] == "/Project/more_details.php") {
         content: "\f005";
     }
 
-    .rating>label {
+    .ratingLabel {
         color: #ddd;
         float: right;
     }
 
     /***** CSS Magic to Highlight Stars on Hover *****/
-
-    .rating>input:checked~label,
     /* show gold star when clicked */
-    .rating:not(:checked)>label:hover,
+    .ratingLabel:hover,
     /* hover current star */
-    .rating:not(:checked)>label:hover~label {
+    .ratingLabel:hover~.ratingLabel {
         color: #ffe234;
-    }
-
-    /* hover previous stars in list */
-
-    .rating>input:checked+label:hover,
-    /* hover current star when changing rating */
-    .rating>input:checked~label:hover,
-    .rating>label:hover~input:checked~label,
-    /* lighten current selection */
-    .rating>input:checked~label:hover~label {
-        color: #ffb000;
     }
 </style>
 <script src="https://kit.fontawesome.com/6d0e983cff.js" crossorigin="anonymous"></script>
@@ -92,28 +87,45 @@ if ($_SERVER['REQUEST_URI'] == "/Project/more_details.php") {
                 </div>
                 <hr>
                 <p class="text-center h5">Your Rating</p>
-                <form action="/Project/shop.php" method="POST">
+                <form action="./shop.php" name="form<?php se($item, "id") ?>" method="POST">
                     <div style="width:110px; margin:auto;">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class="fas fa-star" for="star5"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class="fas fa-star" for="star4"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class="fas fa-star" for="star3"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class="fas fa-star" for="star2"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class="fas fa-star" for="star1"></label>
-                        </fieldset>
+                        <input type="hidden" name="id" value=<?php se($item, "id"); ?>>
+                        <input class="ratingInput" onclick="document.form<?php se($item, 'id') ?>.submit()" type="radio" id="star5" name="rating" value="5" /><label class="ratingLabel fas fa-star" for="star5"></label>
+                        <input class="ratingInput" onclick="document.form<?php se($item, 'id') ?>.submit()" type="radio" id="star4" name="rating" value="4" /><label class="ratingLabel fas fa-star" for="star4"></label>
+                        <input class="ratingInput" onclick="document.form<?php se($item, 'id') ?>.submit()" type="radio" id="star3" name="rating" value="3" /><label class="ratingLabel fas fa-star" for="star3"></label>
+                        <input class="ratingInput" onclick="document.form<?php se($item, 'id') ?>.submit()" type="radio" id="star2" name="rating" value="2" /><label class="ratingLabel fas fa-star" for="star2"></label>
+                        <input class="ratingInput" onclick="document.form<?php se($item, 'id') ?>.submit()" type="radio" id="star1" name="rating" value="1" /><label class="ratingLabel fas fa-star" for="star1"></label>
                     </div>
+                    <?php
+                    if (isset($comments) && is_logged_in()) { ?>
+                        <p>Your rating is: <?php se($comments[0], "rating") ?></p>
+                    <?php } ?>
                 </form>
                 <hr>
                 <p class="text-center h5">Comments</p>
-                <?php for ($x = 0; $x <= 10; $x++) { ?>
+                <?php
+                if (isset($comments) && se($item, "stock", null, false) > 0) { ?>
+                    <?php foreach ($comments as $x) :
+                        if (se($x, "comment", null, false) == "") {
+                            continue;
+                        }
+                    ?>
+                        <div style="border:2px solid black; padding:5px;margin:5px;">
+                            <p><?php echo ucfirst(se($x, "username", null, false)) ?>:<br><?php se($x, "comment") ?></p>
+                        </div>
+                        <br>
+                    <?php endforeach ?>
+                <?php } else { ?>
                     <div style="border:2px solid black; padding:5px;margin:5px;">
-                        <p>Comment <?php echo ($x) ?></p>
+                        <p>No comments</p>
                     </div>
+                    <br>
                 <?php } ?>
-                <br>
-                <form action="/Project/shop.php" method="POST">
+
+                <form method="POST">
                     <div class="form-group row text-center">
                         <div class="col-xs-2">
+                            <input type="hidden" name="id" value="<?php se($item, "id") ?>">
                             <input type="text" class="form-control mb-2" id="message-text" name="comment-text" placeholder="Add a comment..."></input>
                             <input type="submit" class="btn btn-primary" name="comment" value="Comment" />
                         </div>
