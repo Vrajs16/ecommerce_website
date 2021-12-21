@@ -57,6 +57,27 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
+if (isset($_POST["comment"])) {
+    $id = se($_POST, "id", null, false);
+    $first  = '<script type="text/javascript">$(window).on("load", function() {$("#modal';
+    $first .= $id;
+    $first .= '").modal("show");});</script>';
+    if (trim($_POST["comment-text"]) != "") {
+        $userid = get_user_id();
+        $pid = $id;
+        $comment = se($_POST, "comment-text", null, false);
+        $commentQuery = "INSERT INTO Ratings (product_id, user_id, comment) VALUES (:pid, :userid, :comment)";
+        $stmt = $db->prepare($commentQuery); //dynamically generated query
+        try {
+            $stmt->execute([":pid" => $pid, ":userid" => $userid, ":comment" => $comment],);
+        } catch (PDOException $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        }
+        echo $first;
+    } else {
+        echo $first;
+    }
+}
 ?>
 <form class="row row-cols-auto g-3 align-items-center justify-content-center">
     <div class="col">
