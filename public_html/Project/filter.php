@@ -79,7 +79,6 @@ if (isset($_POST["comment"]) && is_logged_in()) {
     }
 }
 if (isset($_POST["rating"]) && is_logged_in()) {
-    echo var_export($_POST);
     $id = se($_POST, "id", null, false);
     $first  = '<script type="text/javascript">$(window).on("load", function() {$("#modal';
     $first .= $id;

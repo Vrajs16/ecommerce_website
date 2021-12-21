@@ -16,7 +16,8 @@
                         <?php if (se($item, "stock", null, false) <= 0) : ?>
                             <p class="card-text h5">(<span class="text-danger h5"><strong>Out Of Stock</strong></span>)</p>
                         <?php endif ?>
-                        <p class="card-text ">Description: <br><?php se($item, "description"); ?></p>
+                        <p class="card-text ">Description: <br><?php se($item, "description");
+                                                                $currentRating = 0; ?></p>
                         <?php require(__DIR__ . "/more_details.php") ?>
                     </div>
                     <div class="card-footer">
