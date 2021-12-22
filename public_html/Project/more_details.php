@@ -94,8 +94,7 @@ try {
                     <span class="fas fa-star" style="color:#ddd;"></span>
                     <span class="fas fa-star" style="color:#ddd;"></span>
                     <span class="fas fa-star" style="color:#ddd;"></span>
-                    <span class="fas fa-star" style="color:#ddd;"></span><br>
-                    <span class="ml-2">4.5</span>
+                    <span class="fas fa-star" style="color:#ddd;"></span>
                 </div>
                 <hr>
                 <p class="text-center h5">Your Rating</p>

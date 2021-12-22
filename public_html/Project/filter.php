@@ -98,7 +98,7 @@ if (isset($_POST["rating"]) && is_logged_in()) {
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
-    echo var_export($countRatings);
+
     if ($countRatings[0]['count'] != "0") {
         $ratingQuery = "Update Ratings set rating = :rating where user_id =:uid and product_id =:pid";
         $stmt = $db->prepare($ratingQuery); //dynamically generated query
