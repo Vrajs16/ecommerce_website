@@ -21,4 +21,5 @@ if (!has_role("Admin")) {
 </div>
 <?php
 require(__DIR__ . "/../show_products.php");
+require(__DIR__ . "/../../../partials/pagination.php");
 ?>

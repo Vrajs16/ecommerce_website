@@ -355,7 +355,372 @@ In this photo you can see the the this order is the same as the one that admin c
 </td>
 </tr></td></tr></table>
 
-- Milestone 4
+
+<table>
+<tr><td>Milestone 4</td></tr><tr><td>
+<table>
+<tr><td>F1 - User can set their profile to be public or private (will need another column in Users table) (2021-12-13)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vas4-prod.herokuapp.com/Project/home.php](https://vas4-prod.herokuapp.com/Project/home.php)</p><p>
+
+ [https://vas4-prod.herokuapp.com/Project/profile.php](https://vas4-prod.herokuapp.com/Project/profile.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Vrajs16/IT202-003/pull/111](https://github.com/Vrajs16/IT202-003/pull/111)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F1 - If public, hide email address from other users</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/145920726-9de6d403-0a75-42c4-898e-ef8c4fa53774.png">
+<p>This shows the homepage where you can see the admin logged in but not in the homepage because the profile is private</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/145920800-7d19ddf4-0f99-4d59-b029-b8863b1b25d9.png">
+<p>This shows the admin profile is already set to private and this is where you can change it to public</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F2 - User will be able to rate a product they purchased (2021-12-21)</td></tr>
+<tr><td>Status: incomplete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vas4-prod.herokuapp.com/Project/shop.php](https://vas4-prod.herokuapp.com/Project/shop.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Vrajs16/IT202-003/pull/114](https://github.com/Vrajs16/IT202-003/pull/114)</p><p>
+
+ [https://github.com/Vrajs16/IT202-003/pull/116](https://github.com/Vrajs16/IT202-003/pull/116)</p><p>
+
+ [https://github.com/Vrajs16/IT202-003/pull/117](https://github.com/Vrajs16/IT202-003/pull/117)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F2 - Create table called Ratings (id, product_id, user_id, rating, comment, created)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147011348-1ce240a5-3bff-4b53-8f69-778a3726bf3f.png">
+<p>This image shows the rating table made correctly.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - 1-5 rating</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147011387-483cdf31-28ad-4dbc-aa2c-0b872c064a12.png">
+<p>This image shows that the user is able to rate the product.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Show the average rating on the Product Details Page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/ff0000/000000?text=incomplete"></td></tr>
+
+<tr><td>
+<img width="768px" src="">
+<p>I was not able to complete this feature as I ran out of time for the milestone.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Pagination</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/ff0000/000000?text=incomplete"></td></tr>
+
+<tr><td>
+<img width="768px" src="">
+<p>Did not have time to incorporate this subfeature. ;(</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F3 - User’s Purchase History Changes (2021-12-19)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vas4-prod.herokuapp.com/Project/purchasehistory.php](https://vas4-prod.herokuapp.com/Project/purchasehistory.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Vrajs16/IT202-003/pull/115](https://github.com/Vrajs16/IT202-003/pull/115)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F3 - Filter by date range</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147012498-fd59e6b1-5714-4ad8-892b-853997a72d83.png">
+<p>This image shows that user is able to filter by date</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - Filter by category</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147012591-fc9aa6b6-1adc-48d0-9bd7-b507e0b222df.png">
+<p>This image shows that user is able to filter by category and this case a credit card</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - Sort by total, date purchased, etc</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147012698-2d9648e7-5ab5-44dd-bc62-d636bd0712f6.png">
+<p>This image shows that I am able to sort by date even though it is hard to show, it work :).</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - Add pagination</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147012745-b08ad9c8-0f18-443f-985c-b214176f145f.png">
+<p>As you can see you can only have a maximum of 3 per purchase-history view.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F4 - Store Owner Purchase History Changes (2021-12-19)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vas4-prod.herokuapp.com/Project/purchasehistory.php](https://vas4-prod.herokuapp.com/Project/purchasehistory.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Vrajs16/IT202-003/pull/115](https://github.com/Vrajs16/IT202-003/pull/115)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F4 - Filter by Date Range</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147013030-e308ef10-ddfa-4c0f-a450-fa35ddb7f8b9.png">
+<p>This image shows that admin can filter by the date-range.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - Filter by Category</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147012938-c51e0930-23c6-41b1-a7a1-e327d645befd.png">
+<p>This image shows that is filtered by the category of cash and only shows those.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - Sort by total, date purchased, etc</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147012890-cbe97a11-5c73-406a-ad85-7704fc5cc866.png">
+<p>As you can see this is the most expensive order from the shop.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - Add pagination</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147012800-dcd9c72b-114a-41c0-83ea-efb501449f9b.png">
+<p>As you can see the pagination shows the other pages with more orders.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - The result page should show the accurate total price of the combined search results (i.e., if just 3 records show each of $25, it should show $75 total for this view)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/147012800-dcd9c72b-114a-41c0-83ea-efb501449f9b.png">
+<p>As you can see the total view of the total purchase for this page.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F5 - Add pagination to Shop Page (and any other product lists not yet mentioned) (2021-12-14)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vas4-prod.herokuapp.com/Project/shop.php](https://vas4-prod.herokuapp.com/Project/shop.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Vrajs16/IT202-003/pull/112](https://github.com/Vrajs16/IT202-003/pull/112)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F5 - Add pagination to Shop Page (and any other product lists not yet mentioned)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/146034220-98701db3-ec28-48ec-af05-58ee18c0ed4b.png">
+<p>This image shows the pagination on the main shop page.
+
+1st page in the pagination</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/146034338-c8d6a8f1-cfe0-4082-845c-ef5591a809b7.png">
+<p>This image shows the pagination on the list products page.
+
+2nd page in the pagination.</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/146034394-c45131a5-c7f1-4205-81a3-25974bc70fd9.png">
+<p>This image shows the pagination on the edit products page.
+
+Last page in the pagination.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F6 - Store Owner will be able to see all products out of stock (2021-12-14)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://vas4-prod.herokuapp.com/Project/shop.php](https://vas4-prod.herokuapp.com/Project/shop.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Vrajs16/IT202-003/pull/113](https://github.com/Vrajs16/IT202-003/pull/113)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F6 - Pagination should account for this new filter</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/146052482-ab4d2428-3d33-4cda-90a9-f3d973589221.png">
+<p>This image shows that 1 product is not in stock because the pagination says 3 is the last page.</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89588024/146052781-b299a42b-74c4-4968-8047-bee6a19e67c5.png">
+<p>If we check the admin account we can see that it says out of stock for the T-shirt and is still included in the pagination.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F7 - User can sort products by average rating on the Shop Page ()</td></tr>
+<tr><td>Status: incomplete</td></tr>
+<tr><td>Links:</td></tr>
+<tr><td>PRs:</td></tr>
+<tr><td>
+<table>
+<tr><td>F7 - Hint: may want to add an “average rating” field to the Products table and update this value any time a new rating is given for the product</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/ff0000/000000?text=incomplete"></td></tr>
+
+<tr><td>
+<img width="768px" src="">
+<p>I did not have enough time to finish this feature before the milestone was due and the previous feature that needs to be done before this feature can be done. I could have easily done this by adding a an AVG to the Products table which would be updated everytime a new rating is made. I would then just add an extra check into the filter for the sorting tab which would be the same as the other sorting options except a name change.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr></td></tr></table>
 
 ### Intructions
 
