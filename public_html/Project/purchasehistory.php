@@ -90,6 +90,7 @@ if (is_logged_in(true)) {
 if (isset($purchaseInfo)) :
     if (has_role("Admin")) {
         echo "<h1>All Purchase History</h1>";
+        echo '<h1 id="total_view"></h1>';
     } else {
         echo "<h1>Purchase History</h1>";
     } ?>
@@ -104,7 +105,7 @@ if (isset($purchaseInfo)) :
         <title>shop.com</title>
         <!-- <script src="./helpers.js"></script> -->
     </head>
-    <h1 id="total_view"></h1>
+
     <div class="message2-info">FILTER</div>
     <script src="https://kit.fontawesome.com/6d0e983cff.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
