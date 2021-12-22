@@ -1,12 +1,9 @@
 <div class="container-fluid">
-    <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center ">
+    <div class="row row-cols-1 row-cols-lg-3 g-5 justify-content-center ">
         <?php foreach ($results as $item) : ?>
-            <?php if (se($item, "visibility", "", false) === "0" && !has_role("Admin")) : ?>
-                <?php continue; ?>
-            <?php endif ?>
             <div class="col">
-                <div class="card h-100 bg-light">
-                    <div class="card-header fs-4">
+                <div class="card h-100 bg-light p-1">
+                    <div class=" card-header fs-4">
                         <?php if (has_role("Admin")) : ?>
                             <form method="POST" action="/Project/admin/edit_products.php">
                                 <input type="hidden" name="id" value="<?php se($item, "id") ?>">
@@ -16,7 +13,11 @@
                         <?php se($item, "name"); ?>
                     </div>
                     <div class="card-body h-100">
-                        <p class="card-text ">Description: <br><?php se($item, "description"); ?></p>
+                        <?php if (se($item, "stock", null, false) <= 0) : ?>
+                            <p class="card-text h5">(<span class="text-danger h5"><strong>Out Of Stock</strong></span>)</p>
+                        <?php endif ?>
+                        <p class="card-text ">Description: <br><?php se($item, "description");
+                                                                $currentRating = 0; ?></p>
                         <?php require(__DIR__ . "/more_details.php") ?>
                     </div>
                     <div class="card-footer">
